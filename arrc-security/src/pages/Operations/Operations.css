@@ -1,0 +1,130 @@
+.operations-page__summary {
+  font-size: 13px;
+  color: var(--muted);
+}
+.operations-steps {
+  display: grid;
+  gap: 0;
+}
+.operations-step {
+  display: grid;
+  grid-template-columns: 100px 1.15fr 1fr;
+  gap: 45px;
+  padding: 45px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 120px;
+}
+.operations-step:first-child {
+  padding-top: 0;
+}
+.operations-step:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.operations-step__number {
+  font-family: Manrope, sans-serif;
+  font-size: 52px;
+  letter-spacing: -0.06em;
+  color: #d5d8e9;
+  line-height: 1.2;
+}
+.operations-step__number > span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--red);
+  margin-top: 15px;
+}
+.operations-step h2 {
+  font-size: 31px;
+  line-height: 1.25;
+}
+.operations-step .eyebrow {
+  font-size: 8px;
+  margin-bottom: 15px;
+}
+.operations-step > div > p:last-child {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.operations-step > ul {
+  align-self: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 17px;
+}
+.operations-step li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #687185;
+}
+.operations-step li svg {
+  color: var(--navy);
+  margin-top: 3px;
+}
+.operations-training {
+  align-items: center;
+  gap: 70px;
+}
+.operations-training > img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.operations-training > div > p:last-of-type {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 24px;
+}
+.operations-training__topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 23px;
+}
+.operations-training__topics > span {
+  border: 1px solid #dce0eb;
+  border-radius: 3px;
+  padding: 9px 12px;
+  font-size: 10px;
+  color: #747d90;
+  background: #fff;
+}
+@media (max-width: 900px) {
+  .operations-step {
+    grid-template-columns: 60px 1fr 1fr;
+    gap: 25px;
+  }
+  .operations-step h2 {
+    font-size: 27px;
+  }
+  .operations-training {
+    gap: 35px;
+  }
+}
+@media (max-width: 700px) {
+  .operations-step {
+    grid-template-columns: 45px 1fr;
+    gap: 20px;
+    padding: 32px 0;
+  }
+  .operations-step__number {
+    font-size: 36px;
+  }
+  .operations-step > ul {
+    grid-column: 2;
+  }
+  .operations-step h2 {
+    font-size: 28px;
+  }
+  .operations-training > img {
+    height: 280px;
+  }
+}

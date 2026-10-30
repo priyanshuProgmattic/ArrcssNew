@@ -1,0 +1,15 @@
+.error-boundary {
+  padding: 100px 25px;
+  text-align: center;
+  background: #f7f8fb;
+}
+.error-boundary .eyebrow {
+  justify-content: center;
+}
+.error-boundary h1 {
+  font-size: 42px;
+}
+.error-boundary > p:not(.eyebrow) {
+  color: var(--muted);
+  margin: 25px 0;
+}

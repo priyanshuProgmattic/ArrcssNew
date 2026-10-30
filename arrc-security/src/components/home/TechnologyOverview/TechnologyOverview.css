@@ -1,0 +1,56 @@
+.technology-overview__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 95px;
+  align-items: center;
+}
+.technology-overview__grid > div:first-child > .lead {
+  font-size: 18px;
+  color: #616b7f;
+  margin: 22px 0 16px;
+}
+.technology-overview__grid > div:first-child > p:not(.lead):not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 400px;
+  line-height: 1.9;
+}
+.technology-overview__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+  max-width: 400px;
+}
+.technology-overview__tags > span {
+  font-size: 10px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  background: #f4f5fa;
+  color: #626b80;
+  border: 1px solid #e9ebf2;
+  border-radius: 6px;
+  padding: 9px 10px;
+}
+.technology-overview__tags svg {
+  color: var(--navy);
+}
+.technology-overview__grid .text-link {
+  font-size: 12px;
+  margin-top: 19px;
+}
+@media (max-width: 1000px) {
+  .technology-overview__grid {
+    gap: 45px;
+  }
+}
+@media (max-width: 700px) {
+  .technology-overview__grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .technology-overview__grid > div:first-child > p:not(.lead):not(.eyebrow) {
+    font-size: 13px;
+  }
+}

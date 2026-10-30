@@ -1,0 +1,39 @@
+[
+  {
+    "tag": "FORM",
+    "name": "",
+    "id": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "id": "",
+    "placeholder": " Name",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "email",
+    "name": "",
+    "id": "",
+    "placeholder": " Email",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "id": "",
+    "placeholder": " Phone no",
+    "required": false
+  },
+  {
+    "tag": "TEXTAREA",
+    "type": "textarea",
+    "name": "",
+    "id": "",
+    "placeholder": "Message",
+    "required": false
+  }
+]

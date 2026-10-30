@@ -1,0 +1,237 @@
+.inquiry-form {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 38px;
+  background: white;
+  box-shadow: 0 10px 50px #20285805;
+}
+.inquiry-form__heading {
+  margin-bottom: 32px;
+}
+.inquiry-form__heading h2 {
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  line-height: 1.35;
+}
+.inquiry-form__heading p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.inquiry-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 20px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+.form-field--full {
+  grid-column: 1/-1;
+}
+.form-field label {
+  font-size: 12px;
+  font-weight: 550;
+  color: #3f475c;
+}
+.form-field label > span:not(.optional) {
+  color: var(--red);
+}
+.form-field .optional {
+  font-size: 9px;
+  font-weight: 400;
+  color: #999faf;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid #dfe3ec;
+  border-radius: 6px;
+  background: #fcfcfe;
+  padding: 13px 14px;
+  font-size: 13px;
+  color: #3f4860;
+  transition: border-color 0.2s;
+  line-height: 1.5;
+  min-height: 48px;
+}
+.form-field textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #a0a6b3;
+}
+.form-field select {
+  padding-right: 28px;
+}
+.form-field [aria-invalid='true'] {
+  border-color: #c94e59;
+  background: #fffafa;
+}
+.field-error {
+  color: #b13042;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.consent-field {
+  margin: 25px 0;
+}
+.consent-field > label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.consent-field input {
+  accent-color: var(--navy);
+  margin: 3px 0 0;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.consent-field a {
+  text-decoration: underline;
+  color: var(--navy);
+  text-underline-offset: 2px;
+}
+.consent-field > .field-error {
+  display: block;
+  margin-top: 7px;
+}
+.inquiry-form__submit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  align-items: center;
+}
+.inquiry-form__submit > span {
+  font-size: 8px;
+  color: #999faf;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.form-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  border: 1px solid #d8dcee;
+  border-radius: 5px;
+  background: #f6f7fc;
+  padding: 20px;
+  margin-top: 25px;
+  color: var(--navy);
+  font-size: 12px;
+}
+.form-notice > svg {
+  margin-top: 3px;
+}
+.form-notice > div {
+  min-width: 0;
+  flex: 1;
+}
+.form-notice p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.form-notice .form-notice__delivery {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 7px;
+}
+.form-notice .text-link {
+  font-size: 11px;
+}
+.form-notice--error {
+  border-color: #efd2d8;
+  color: #ad3044;
+  background: #fff7f8;
+}
+.form-notice--success {
+  border-color: #bddfcd;
+  background: #f1f9f5;
+  color: #286442;
+}
+.form-notice details {
+  margin-top: 7px;
+  color: #7a8294;
+  font-size: 10px;
+}
+.form-notice summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.form-notice pre {
+  font-family: Inter, sans-serif;
+  font-size: 10px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: white;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 0;
+}
+@media (max-width: 900px) {
+  .inquiry-form {
+    padding: 27px;
+  }
+  .inquiry-form__heading h2 {
+    font-size: 25px;
+  }
+  .inquiry-form__grid {
+    gap: 22px 14px;
+  }
+}
+@media (max-width: 600px) {
+  .inquiry-form {
+    padding: 24px 19px;
+  }
+  .inquiry-form__grid {
+    grid-template-columns: 1fr;
+    gap: 21px;
+  }
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 16px;
+    padding: 12px;
+  }
+  .inquiry-form__heading h2 {
+    font-size: 25px;
+  }
+  .inquiry-form__heading p {
+    font-size: 12px;
+  }
+  .consent-field > label {
+    font-size: 11px;
+  }
+  .inquiry-form__submit {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .field-error {
+    font-size: 11px;
+  }
+  .form-notice {
+    padding: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 16px;
+  }
+}

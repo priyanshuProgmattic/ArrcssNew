@@ -1,0 +1,125 @@
+.why-arrc__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 110px;
+}
+.why-arrc__intro > p:not(.eyebrow) {
+  max-width: 380px;
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 24px;
+  line-height: 1.9;
+}
+.why-arrc__intro .text-link {
+  font-size: 12px;
+  margin-top: 15px;
+}
+.why-arrc__signature {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 55px;
+  color: var(--navy);
+}
+.why-arrc__signature > span {
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  line-height: 1.9;
+}
+.why-arrc__signature strong {
+  font-family: Manrope, sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+  font-weight: 550;
+}
+.why-arrc__features {
+  display: grid;
+  gap: 27px;
+}
+.why-arrc__feature {
+  display: flex;
+  gap: 23px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+.why-arrc__feature:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.why-arrc__feature > div {
+  position: relative;
+  flex: 1;
+}
+.why-arrc__icon {
+  color: var(--navy);
+  padding-top: 3px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #f4f5fa;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+.why-arrc__number {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 10px;
+  color: #a2a6b3;
+}
+.why-arrc__feature h3 {
+  font-size: 19px;
+  padding-right: 25px;
+  margin-bottom: 9px;
+}
+.why-arrc__feature p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 385px;
+}
+@media (max-width: 1000px) {
+  .why-arrc__grid {
+    gap: 55px;
+  }
+}
+@media (max-width: 650px) {
+  .why-arrc__grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .why-arrc__signature {
+    display: none;
+  }
+  .why-arrc__feature {
+    gap: 17px;
+    padding-bottom: 23px;
+  }
+  .why-arrc__feature p {
+    font-size: 13px;
+  }
+  .why-arrc__intro > p:not(.eyebrow) {
+    font-size: 13px;
+  }
+  .why-arrc__features {
+    gap: 23px;
+  }
+}
+
+@media (max-width: 700px) {
+  .why-arrc__intro > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .why-arrc__feature h3 {
+    font-size: 18px;
+  }
+  .why-arrc__feature p {
+    font-size: 13px;
+  }
+  .why-arrc__icon {
+    width: 39px;
+    height: 39px;
+  }
+}

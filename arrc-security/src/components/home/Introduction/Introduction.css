@@ -1,0 +1,208 @@
+.introduction__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 85px;
+  align-items: center;
+}
+.introduction__visual {
+  height: 495px;
+  position: relative;
+  padding-bottom: 22px;
+}
+.introduction__visual > img {
+  width: calc(100% - 20px);
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.introduction__heritage {
+  position: absolute;
+  bottom: 51px;
+  right: -12px;
+  width: 235px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 26px;
+  box-shadow: 0 10px 50px #232a5b0a;
+}
+.introduction__heritage > span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.introduction__heritage > strong {
+  font-family: Manrope, sans-serif;
+  font-size: 52px;
+  color: var(--navy);
+  font-weight: 600;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  letter-spacing: -0.055em;
+  margin: 13px 0;
+}
+.introduction__heritage > strong > span {
+  font-family: Inter, sans-serif;
+  font-size: 8px;
+  line-height: 1.7;
+  max-width: 60px;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+.introduction__heritage > div {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+}
+.introduction__image-note {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 7px;
+  letter-spacing: 0.13em;
+  color: #8c92a0;
+}
+.introduction__copy h2 {
+  font-size: clamp(32px, 2.9vw, 43px);
+}
+.introduction__copy h2 > span {
+  color: #7e8495;
+}
+.introduction__copy > .lead {
+  font-size: 16px;
+  color: var(--ink);
+  margin-top: 23px;
+  margin-bottom: 13px;
+  max-width: 440px;
+}
+.introduction__copy > p:not(.lead):not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.introduction__values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0 17px;
+}
+.introduction__values > span {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 12px;
+  color: #50596b;
+}
+.introduction__values svg {
+  color: var(--navy);
+}
+.introduction__copy > .text-link {
+  font-size: 12px;
+}
+@media (max-width: 1100px) {
+  .introduction__grid {
+    gap: 55px;
+  }
+  .introduction__visual {
+    height: 460px;
+  }
+  .introduction__heritage {
+    right: -10px;
+    width: 205px;
+    padding: 22px;
+  }
+  .introduction__copy h2 {
+    font-size: 33px;
+  }
+}
+@media (max-width: 800px) {
+  .introduction__grid {
+    gap: 35px;
+  }
+  .introduction__visual {
+    height: 500px;
+  }
+  .introduction__heritage {
+    right: 0;
+    bottom: 45px;
+  }
+  .introduction__copy h2 {
+    font-size: 29px;
+  }
+  .introduction__values {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .introduction__grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .introduction__visual {
+    height: 330px;
+    margin-right: 12px;
+  }
+  .introduction__heritage {
+    right: -12px;
+    bottom: 37px;
+    width: 190px;
+    padding: 19px;
+  }
+  .introduction__heritage > strong {
+    font-size: 40px;
+    margin: 9px 0;
+  }
+  .introduction__heritage > div {
+    font-size: 10px;
+  }
+  .introduction__visual > img {
+    width: 100%;
+  }
+  .introduction__copy h2 {
+    font-size: 32px;
+  }
+  .introduction__values {
+    grid-template-columns: 1fr 1fr;
+  }
+  .introduction__copy > p:not(.lead):not(.eyebrow) {
+    font-size: 13px;
+  }
+  .introduction__copy > .lead {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .introduction__visual {
+    height: 350px;
+  }
+  .introduction__heritage {
+    width: 205px;
+    padding: 22px;
+    right: -10px;
+  }
+  .introduction__heritage > strong {
+    font-size: 45px;
+  }
+  .introduction__heritage > span {
+    font-size: 8px;
+  }
+  .introduction__heritage > div {
+    font-size: 11px;
+  }
+  .introduction__copy > p:not(.lead):not(.eyebrow) {
+    font-size: 14px;
+  }
+  .introduction__values > span {
+    font-size: 11px;
+  }
+  .introduction__copy h2 {
+    font-size: 32px;
+  }
+}

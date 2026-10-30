@@ -1,0 +1,252 @@
+.technology-panel {
+  background: #fff;
+  border: 1px solid #dfe2ee;
+  border-radius: 12px;
+  box-shadow: 0 16px 55px #30358c09;
+  padding: 0;
+  overflow: hidden;
+}
+.technology-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 19px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.technology-panel__brand {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--navy);
+}
+.technology-panel__brand > span {
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  margin-left: 4px;
+  color: #8d94a5;
+}
+.technology-panel__demo {
+  font-size: 7px;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  border: 1px solid #e2e5ed;
+  border-radius: 3px;
+  padding: 5px 7px;
+  white-space: nowrap;
+}
+.technology-panel__map {
+  height: 310px;
+  position: relative;
+  background-color: #f7f8fb;
+  background-image:
+    linear-gradient(#dee3ed65 1px, transparent 1px),
+    linear-gradient(90deg, #dee3ed65 1px, transparent 1px);
+  background-size: 32px 32px;
+  overflow: hidden;
+}
+.map-boundary {
+  position: absolute;
+  inset: 44px 54px 39px;
+  border: 1px dashed #777cbc;
+  border-radius: 15px;
+  background: #30358c04;
+  transform: rotate(-9deg);
+}
+.map-boundary > span {
+  font-size: 6px;
+  letter-spacing: 0.15em;
+  color: #8b90b6;
+  position: absolute;
+  top: -12px;
+  left: 10px;
+}
+.map-building {
+  position: absolute;
+  background: #e5e8f0;
+  border: 1px solid #dadfeb;
+  box-shadow: 6px 6px 0 #c9cfde45;
+  border-radius: 2px;
+}
+.map-building--one {
+  width: 100px;
+  height: 70px;
+  top: 80px;
+  left: 90px;
+  transform: rotate(-9deg);
+}
+.map-building--two {
+  width: 73px;
+  height: 100px;
+  top: 70px;
+  right: 95px;
+  transform: rotate(-9deg);
+}
+.map-building--three {
+  width: 63px;
+  height: 40px;
+  bottom: 47px;
+  left: 190px;
+  transform: rotate(-9deg);
+}
+.map-path {
+  position: absolute;
+  left: 75px;
+  right: 80px;
+  top: 87px;
+  height: 140px;
+  border: 2px dashed #989cc6;
+  border-radius: 55px 10px 45px 25px;
+  transform: rotate(-9deg);
+}
+.map-pin {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: white;
+  color: var(--navy);
+  box-shadow: 0 2px 9px #30358c22;
+  border: 1px solid #b3b6d4;
+}
+.map-pin--one {
+  top: 78px;
+  left: 77px;
+}
+.map-pin--two {
+  bottom: 63px;
+  right: 93px;
+}
+.map-pin--three {
+  top: 96px;
+  right: 77px;
+  background: var(--navy);
+  color: white;
+  width: 31px;
+  height: 31px;
+  box-shadow: 0 0 0 7px #30358c10;
+}
+.map-site-label {
+  position: absolute;
+  top: 148px;
+  left: 93px;
+  font-size: 6px;
+  letter-spacing: 0.1em;
+  color: #8c92a7;
+  transform: rotate(-9deg);
+}
+.map-checkpoint {
+  position: absolute;
+  bottom: 18px;
+  left: 19px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 17px;
+  color: var(--navy);
+  box-shadow: 0 3px 10px #20255b08;
+}
+.map-checkpoint > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.map-checkpoint strong {
+  font-size: 9px;
+  color: #3e4660;
+  font-weight: 550;
+}
+.map-checkpoint > div > span {
+  font-size: 7px;
+  color: #8991a2;
+}
+.map-compass {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  color: #9aa0b3;
+  font-size: 8px;
+}
+.technology-panel__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 21px 20px 13px;
+}
+.technology-panel__bottom > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6c7488;
+  font-size: 9px;
+}
+.technology-panel__bottom svg {
+  color: var(--navy);
+}
+.technology-panel__caption {
+  font-size: 8px;
+  text-align: center;
+  color: #939aaa;
+  padding: 0 10px 16px;
+  line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .technology-panel__top {
+    padding: 16px;
+  }
+  .technology-panel__brand > span {
+    display: none;
+  }
+  .technology-panel__map {
+    height: 260px;
+  }
+  .map-boundary {
+    inset: 45px 35px;
+  }
+  .map-building--one {
+    left: 65px;
+  }
+  .map-building--two {
+    right: 60px;
+  }
+  .map-building--three {
+    left: 150px;
+  }
+  .map-pin--one {
+    left: 45px;
+  }
+  .map-pin--three {
+    right: 47px;
+  }
+  .map-pin--two {
+    right: 63px;
+  }
+  .map-path {
+    left: 45px;
+    right: 50px;
+  }
+  .map-site-label {
+    left: 65px;
+  }
+  .technology-panel__bottom {
+    padding: 18px 12px 12px;
+    gap: 6px;
+  }
+  .technology-panel__bottom > span {
+    font-size: 7px;
+    gap: 4px;
+  }
+  .technology-panel__bottom svg {
+    width: 14px;
+    height: 14px;
+  }
+}

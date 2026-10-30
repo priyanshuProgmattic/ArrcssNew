@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Add Sitemap: https://YOUR-PRODUCTION-DOMAIN/sitemap.xml after deployment.

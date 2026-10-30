@@ -1,0 +1,111 @@
+[
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "placeholder": " Name",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "email",
+    "name": "",
+    "placeholder": " Email",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "placeholder": " Phone no",
+    "required": false
+  },
+  {
+    "tag": "TEXTAREA",
+    "type": "textarea",
+    "name": "",
+    "placeholder": "Message",
+    "required": false
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "designation",
+    "required": true,
+    "options": [
+      "Select Job Role",
+      "Security Guards",
+      "Supervisors",
+      "ASO",
+      "SO",
+      "Gunman-Civilian",
+      "Ex-serviceman",
+      "Ex-Service Man Training Officer",
+      "PSO",
+      "Facility Staff"
+    ]
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "yourName",
+    "placeholder": "Your Name",
+    "required": true
+  },
+  {
+    "tag": "INPUT",
+    "type": "email",
+    "name": "email",
+    "placeholder": "Email",
+    "required": true
+  },
+  {
+    "tag": "INPUT",
+    "type": "tel",
+    "name": "phoneNo",
+    "placeholder": "Phone Number",
+    "required": true
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "address",
+    "placeholder": "Address",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "currentLocation",
+    "placeholder": "Current Location",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "experience",
+    "placeholder": "Experience",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "lastSalary",
+    "placeholder": "Last Salary",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "lastPost",
+    "placeholder": "Last Post In",
+    "required": false
+  },
+  {
+    "tag": "INPUT",
+    "type": "file",
+    "name": "resume",
+    "placeholder": "",
+    "required": true
+  }
+]

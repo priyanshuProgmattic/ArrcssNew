@@ -1,0 +1,89 @@
+.quote-page__grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 85px;
+  align-items: start;
+}
+.quote-page aside > p:not(.eyebrow):not(.quote-page__footnote) {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 335px;
+  margin-top: 26px;
+}
+.quote-page aside > ol {
+  list-style: none;
+  display: grid;
+  gap: 22px;
+  padding: 0;
+  margin: 34px 0;
+}
+.quote-page aside > ol > li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+  color: #616a7e;
+  line-height: 1.7;
+}
+.quote-page aside > ol > li > span {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #dfe2ef;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.quote-page__phone {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid var(--line);
+  padding-top: 27px;
+  color: var(--navy);
+}
+.quote-page__phone > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.quote-page__phone span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.quote-page__phone a {
+  font-size: 19px;
+  font-family: Manrope, sans-serif;
+  font-weight: 550;
+}
+.quote-page aside .quote-page__footnote {
+  font-size: 10px;
+  color: #939aab;
+  max-width: 330px;
+  margin-top: 25px;
+  line-height: 1.9;
+}
+@media (max-width: 1000px) {
+  .quote-page__grid {
+    gap: 45px;
+    grid-template-columns: 0.75fr 1.25fr;
+  }
+}
+@media (max-width: 800px) {
+  .quote-page__grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .quote-page aside > ol {
+    margin: 26px 0;
+    gap: 15px;
+  }
+  .quote-page__phone {
+    padding-top: 22px;
+  }
+  .quote-page aside > p:not(.eyebrow):not(.quote-page__footnote) {
+    max-width: 500px;
+  }
+}

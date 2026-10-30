@@ -1,0 +1,104 @@
+.service-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #bcbfdf;
+  box-shadow: 0 14px 30px #25296408;
+}
+.service-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 27px;
+}
+.service-card__icon {
+  color: var(--navy);
+  background: #f1f2f9;
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+}
+.service-card__number {
+  font-size: 11px;
+  color: #9298a6;
+  font-family: Manrope, sans-serif;
+}
+.service-card h3 {
+  font-size: 22px;
+  margin-bottom: 13px;
+}
+.service-card > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 28px;
+}
+.service-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid #eef0f4;
+}
+@media (max-width: 700px) {
+  .service-card {
+    padding: 25px;
+  }
+  .service-card__top {
+    margin-bottom: 22px;
+  }
+}
+.service-card__link > svg {
+  border: 1px solid #e4e7ef;
+  border-radius: 50%;
+  padding: 7px;
+  box-sizing: content-box;
+  transition: 0.2s;
+}
+.service-card:hover .service-card__link > svg {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+@media (max-width: 900px) {
+  .service-card {
+    padding: 27px;
+  }
+  .service-card h3 {
+    font-size: 21px;
+  }
+}

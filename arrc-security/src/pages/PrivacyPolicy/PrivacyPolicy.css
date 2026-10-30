@@ -1,0 +1,25 @@
+.privacy-page h1 {
+  font-size: clamp(42px, 5vw, 65px);
+}
+.privacy-draft {
+  margin: 32px 0;
+  padding: 22px 25px;
+  border: 1px solid #e1e4ef;
+  background: #f6f7fb;
+  border-radius: 5px;
+}
+.privacy-draft strong {
+  font-size: 12px;
+  color: var(--navy);
+}
+.privacy-draft p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 9px;
+}
+.privacy-page .prose {
+  font-size: 14px;
+}
+.privacy-page .prose h2 {
+  font-size: 27px;
+}

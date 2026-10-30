@@ -1,0 +1,76 @@
+.service-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.service-filters > button {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 19px;
+  font-size: 11px;
+  color: #687084;
+  background: white;
+  transition: 0.2s;
+}
+.service-filters > button:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.service-filters > button.active {
+  color: #fff;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.service-count {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 22px 0;
+}
+.services-directory {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.services-integrated {
+  align-items: center;
+  gap: 75px;
+}
+.services-integrated > img {
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
+}
+.services-integrated > div > p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 25px;
+}
+.services-integrated .button {
+  margin-top: 27px;
+}
+@media (max-width: 900px) {
+  .services-directory {
+    grid-template-columns: 1fr 1fr;
+  }
+  .services-integrated {
+    gap: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .services-directory {
+    grid-template-columns: 1fr;
+  }
+  .service-filters {
+    gap: 8px;
+  }
+  .service-filters > button {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+  .services-integrated > img {
+    height: 270px;
+  }
+}

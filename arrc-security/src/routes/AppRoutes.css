@@ -1,0 +1,9 @@
+.route-loading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+}
+.route-loading > span {
+  display: block;
+}
