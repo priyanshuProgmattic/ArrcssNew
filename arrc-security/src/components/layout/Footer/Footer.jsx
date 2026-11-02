@@ -57,13 +57,13 @@ export default function Footer() {
             <p>
               <Icon name="MapPin" size={16} />
               <span>
-                202, 2nd Floor, Greenwood Plaza,
+                {company.offices[0].label}
                 <br />
-                Sector 45, Gurugram, Haryana 122001
+                {company.offices[0].address}
               </span>
             </p>
             <Link to="/contact-us" className="text-link">
-              Find our offices
+              Find our office
               <Icon name="ArrowRight" size={15} />
             </Link>
           </div>

@@ -1,130 +1,60 @@
-.office-locations__intro {
-  font-size: 12px;
-  color: var(--muted);
-}
 .office-locations__grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 35px;
+  align-items: start;
 }
-.office-locations__list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.office-locations__list > button {
+.office-locations__office {
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  padding: 25px;
-  background: #fff;
-  border: 1px solid #e1e4ee;
+  min-width: 0;
+  padding: 30px;
+  background: white;
+  border: 1px solid var(--line);
   border-radius: 5px;
-  color: #7b8396;
-  text-align: left;
-  transition: 0.2s;
 }
-.office-locations__list > button.active {
-  border-color: #7a7eb1;
-  background: #fbfbff;
-}
-.office-locations__list > button > svg {
+.office-locations__office > svg {
+  flex-shrink: 0;
   color: var(--navy);
-  margin-top: 5px;
 }
-.office-locations__list > button > svg:last-child {
-  margin-left: auto;
+.office-locations__office > div {
+  min-width: 0;
 }
-.office-locations__list > button > div {
-  flex: 1;
+.office-locations__office .eyebrow {
+  margin-bottom: 10px;
 }
-.office-locations__list > button > div > span {
-  font-size: 8px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.office-locations__office h3 {
+  font-size: 27px;
+  margin-bottom: 15px;
+}
+.office-locations__office p:not(.eyebrow),
+.office-locations__office a {
+  font-size: 13px;
+  line-height: 1.9;
   color: var(--muted);
 }
-.office-locations__list h3 {
-  font-size: 23px;
-  color: var(--ink);
-  margin: 6px 0 11px;
+.office-locations__office a {
+  display: block;
+  margin-top: 14px;
+  overflow-wrap: anywhere;
 }
-.office-locations__list p {
-  font-size: 11px;
-  line-height: 1.9;
-  max-width: 330px;
+.office-locations__office a:hover {
+  color: var(--navy);
 }
 .office-map {
   border: 1px solid var(--line);
-  min-height: 475px;
+  height: 450px;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
-  display: grid;
   background: #edf0f5;
 }
-.office-map__placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  text-align: center;
-  padding: 40px;
-  background-image:
-    linear-gradient(#d3d8e34a 1px, transparent 1px),
-    linear-gradient(90deg, #d3d8e34a 1px, transparent 1px);
-  background-size: 35px 35px;
-}
-.office-map__pin {
-  display: grid;
-  place-items: center;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--navy);
-  box-shadow: 0 0 0 15px #ffffff55;
-  margin-bottom: 28px;
-}
-.office-map__placeholder .eyebrow {
-  font-size: 8px;
-  justify-content: center;
-  margin-bottom: 11px;
-}
-.office-map__placeholder .eyebrow::before {
-  display: none;
-}
-.office-map__placeholder h3 {
-  font-size: 27px;
-}
-.office-map__placeholder > p:not(.eyebrow) {
-  font-size: 11px;
-  color: var(--muted);
-  max-width: 290px;
-  margin-top: 12px;
-}
-.office-map__placeholder > button {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 0;
-  border-radius: 4px;
-  background: var(--navy);
-  color: white;
-  padding: 12px 17px;
-  font-size: 10px;
-  margin-top: 23px;
-}
-.office-map__placeholder > span:last-child {
-  font-size: 8px;
-  color: #949cad;
-  margin-top: 13px;
-}
 .office-map iframe {
+  display: block;
   border: 0;
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 .office-map__directions {
   position: absolute;
@@ -147,18 +77,15 @@
     gap: 25px;
   }
   .office-map {
-    min-height: 420px;
+    height: 380px;
   }
 }
 @media (max-width: 600px) {
-  .office-locations__list > button {
-    padding: 21px;
+  .office-locations__office {
+    padding: 25px 20px;
     gap: 15px;
   }
-  .office-map__placeholder {
-    padding: 30px 25px 70px;
-  }
   .office-map {
-    min-height: 430px;
+    height: 320px;
   }
 }

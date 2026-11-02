@@ -5,6 +5,7 @@
     "dev": "npm --prefix arrc-security run dev --",
     "build": "npm --prefix arrc-security run build",
     "preview": "npm --prefix arrc-security run preview --",
+    "start": "npm --prefix arrc-security start",
     "test": "npm --prefix arrc-security test"
   }
 }

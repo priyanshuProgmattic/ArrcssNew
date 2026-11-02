@@ -33,7 +33,7 @@ const pages = {
   ],
   '/contact-us': [
     'Contact Us',
-    'Contact ARRC Security Solutions. Find our offices in Delhi, Gurugram and Noida, or speak with our team about your requirements.',
+    'Contact ARRC Security Solutions at our corporate office in Greenwood Plaza, Sec-45 Gurugram, or speak with our team about your requirements.',
   ],
   '/careers': [
     'Careers',
@@ -45,7 +45,7 @@ const pages = {
   ],
   '/privacy-policy': [
     'Privacy Policy',
-    'Draft privacy information explaining enquiries, email drafts, optional map loading and the use of contact details on this website.',
+    'Draft privacy information explaining email enquiries, career applications, Google Maps and the use of contact details on this website.',
   ],
 };
 function meta(key, content, attribute = 'name') {
@@ -95,14 +95,14 @@ export default function usePageMeta() {
       url: origin,
       logo: `${origin}/assets/logo/arrc-logo.png`,
       email: company.email,
-      telephone: company.salesPhone,
+      telephone: [company.salesTel, company.officeTel],
       foundingDate: '2024-06-25',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '794, 100 Feet Road, Mangu Street, Ghitorni Village',
-        addressLocality: 'South Delhi',
-        addressRegion: 'Delhi',
-        postalCode: '110030',
+        streetAddress: company.offices[0].streetAddress,
+        addressLocality: company.offices[0].name,
+        addressRegion: company.offices[0].region,
+        postalCode: company.offices[0].postalCode,
         addressCountry: 'IN',
       },
     });

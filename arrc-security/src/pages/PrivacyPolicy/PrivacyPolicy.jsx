@@ -28,16 +28,13 @@ export default function PrivacyPolicy() {
           </p>
           <h2>How enquiries work</h2>
           <p>
-            By default, the form prepares an email draft on your device. The website does not submit
-            that enquiry to a company server. You review and send the draft using your chosen email
-            application, whose provider processes the email under its own terms.
+            When you submit an enquiry or quote request, the website sends your details to our
+            server, which emails them to {company.email}. Our team uses these details to respond to
+            your request. A confirmation appears after our mail server accepts the message.
           </p>
           <p>
-            If a company enquiry endpoint is configured, the form sends the information you provide
-            to that endpoint to process your request and contact you. The website only confirms
-            receipt after the endpoint explicitly confirms success. The company must document its
-            service provider, access controls and retention arrangements before enabling that
-            integration.
+            If sending fails, you may open a draft in your email application and send it yourself.
+            Your email provider processes that message under its own terms.
           </p>
           <h2>Career applications and resumes</h2>
           <p>
@@ -46,11 +43,10 @@ export default function PrivacyPolicy() {
             recent position or employer. These additional details are optional.
           </p>
           <p>
-            By default, the careers form prepares an email draft. Selecting a resume does not upload
-            it. You must attach that file in your email app before sending your application. If a
-            recruitment endpoint is configured, the form sends your application details and selected
-            resume to that endpoint after you choose to submit. The company must review recruitment
-            access, processing and retention arrangements before enabling that service.
+            Submitting an application uploads your details and selected resume to our server, which
+            emails them to {company.email} with the resume attached. Selecting a file alone does not
+            upload it. If you use the email fallback after a failed submission, attach your resume
+            in your email application before sending.
           </p>
           <h2>Local storage, cookies and analytics</h2>
           <p>
@@ -62,10 +58,10 @@ export default function PrivacyPolicy() {
           </p>
           <h2>Maps and external links</h2>
           <p>
-            Office maps are loaded from Google Maps only when you choose to load an interactive map.
-            This sends a request to Google, which may process information under its own privacy
-            policy. Direction links also open Google Maps. Telephone and email links open
-            applications on your device.
+            The contact page embeds a map from Google Maps, which loads as you approach it. This
+            sends a request to Google, which may process information under its own privacy policy.
+            Direction links also open Google Maps. Telephone and email links open applications on
+            your device.
           </p>
           <h2>How your details are used</h2>
           <p>

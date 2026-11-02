@@ -50,9 +50,9 @@ export default function About() {
               company.
             </p>
             <p>
-              With offices in Delhi, Gurugram and Noida, we support corporate, commercial,
-              residential and operational environments through services designed around the actual
-              requirements of each site.
+              From our corporate office in Gurugram, we support corporate, commercial, residential
+              and operational environments through services designed around the actual requirements
+              of each site.
             </p>
             <p>
               Our philosophy is simple: security goes beyond placing a guard at a gate. It means

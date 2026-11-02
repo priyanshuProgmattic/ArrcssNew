@@ -17,6 +17,8 @@ Open the Local URL printed by Vite. For production:
 ```powershell
 npm run build
 npm run preview
+# On Node.js hosting, serve the site and form endpoints together:
+npm start
 ```
 
 ## Where to update things
@@ -61,27 +63,31 @@ Home, About Us, Services, seven service detail routes, Operations, Technology, I
 
 ## Enquiries and integrations
 
-No backend credentials are required to run the site. The default form validates entries and prepares an email draft. Visitors review the draft and choose to open their email app. The site never claims that an email draft was sent.
+Contact, quote and career forms submit to the included Node.js backend and email `info@arcsecuritysolutions.in`. Career resumes are attached to the email. The recipient is set on the server; visitors cannot change it. The server validates submissions, limits request sizes and allows ten attempts per IP address per fifteen minutes.
 
-To enable direct form delivery, copy `.env.example` to `.env.local` and set `VITE_INQUIRY_ENDPOINT` to an endpoint you operate. It must accept a JSON POST and return a 2xx JSON response with `{ "success": true }` only after accepting the enquiry. A different origin requires appropriate CORS configuration. Configure server-side validation, abuse protection, email delivery and retention in that backend. Do not put private API keys in `VITE_` variables: they are public build-time settings.
+Copy `.env.example` to `.env.local` and set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` and `SMTP_FROM` using your mail provider's settings. Use port 587 with `SMTP_SECURE=false` for STARTTLS, or port 465 with `SMTP_SECURE=true` for implicit TLS. `SMTP_FROM` must be authorized by your provider; replies go to the visitor's email address. SMTP settings are server-only and must never use the `VITE_` prefix. Restart the server after changing them. See [EMAIL-SETUP.md](docs/EMAIL-SETUP.md).
 
-Office maps load from Google Maps only when a visitor clicks the map loader. Direction links open Google Maps. No analytics or tracking integrations are installed.
+`npm run dev` and `npm run preview` include the same email endpoints through Vite middleware. On production Node.js hosting, run `npm run build` followed by `npm start`; this serves `dist/`, both API endpoints and application route fallbacks on `PORT` (default 3000). A static-only deployment cannot run the email backend. Optional `VITE_INQUIRY_ENDPOINT` and `VITE_CAREERS_ENDPOINT` overrides are retained for an existing compatible API.
+
+The forms confirm success only after the SMTP server accepts the recipient. Missing credentials or mail failures show an error and preserve the entered details, with an email-app fallback. No message is claimed to be sent when delivery fails.
+
+The only published office is Corporate off: 103, 1st floor, Greenwood Plaza, Sec-45 Gurugram, Haryana, 122001, with phone `0124-4256608/09`. Its responsive map uses the supplied Google Maps embed and lazy loading. Direction links open Google Maps. No analytics or tracking integrations are installed.
 
 ### Career applications
 
-The career page preserves the reference's Direct and Indirect Staff categories and application fields. Update roles and the recruitment email in `src/data/careers.js`. They are expressions of interest, not a feed of confirmed vacancies.
+The career page has two category cards, Direct and Indirect Staff, matching the reference. Each Apply button opens a popup with its corresponding job dropdown and the reference's application fields. The popup supports Cancel, Escape, backdrop dismissal, keyboard focus containment and focus return. It scrolls on small screens, and closing it clears the form. Update roles and the recruitment email in `src/data/careers.js`. They are expressions of interest, not a feed of confirmed vacancies.
 
-Without `VITE_CAREERS_ENDPOINT`, the career form prepares an email draft and instructs the applicant to attach their selected resume in their email app. Selecting a file does not upload it. PDF, DOC and DOCX files up to 5 MB are supported.
+Applications submit to `/api/careers` with the selected resume, and are emailed to the same inbox as enquiries. Selecting a file alone does not upload it. PDF, DOC and DOCX files up to 5 MB are supported, with validation on both the client and server. Resume files are handled in memory and are not saved to disk by the application.
 
-For direct applications, configure `VITE_CAREERS_ENDPOINT`. The endpoint must accept `multipart/form-data`, including the `resume` file, application fields, `category` and `source`, and return a 2xx JSON response containing `{ "success": true }` only after accepting it. The browser sets the multipart boundary automatically. The backend must validate uploaded files and define recruitment access and retention arrangements.
+If overriding `VITE_CAREERS_ENDPOINT`, the replacement must accept `multipart/form-data`, including the `resume` file, application fields, `category` and `source`, and return a 2xx JSON response containing `{ "success": true }` only after accepting it. The browser sets the multipart boundary automatically.
 
 ## Before hosting
 
 - Review the draft privacy policy and source verification notes with the company.
 - Set `VITE_SITE_URL` to the final production origin.
 - Generate a sitemap for the actual origin, for example `$env:SITE_URL='https://arrcss.com'; node scripts/generate-sitemap.mjs`, then add its URL to `public/robots.txt`.
-- Serve `dist/` with all application routes falling back to `index.html`. A Netlify-compatible `public/_redirects` file is included. Configure an equivalent fallback for other hosts.
-- Forms need the optional enquiry endpoint only if direct submission is desired. There is no CRM, email service or live security dashboard integration.
+- Use `npm start` for the included Node.js server. When using a separate static host, deploy the backend separately and route `/api/*` to it, or configure compatible endpoint overrides with appropriate CORS rules.
+- Configure your provider's SMTP credentials on the server and test delivery to the company inbox before publishing. Set `TRUST_PROXY=true` only behind a trusted reverse proxy that overwrites `X-Forwarded-For`.
 
 ## Verification
 
@@ -90,4 +96,4 @@ npm test
 npm run build
 ```
 
-The browser checks in `scripts/browser-check.mjs` use the installed Google Chrome. With `npm run dev -- --port 5173 --strictPort` running, execute `node scripts/browser-check.mjs`. They verify routes, assets, responsive overflow, menu behavior, service filters, process tabs and form behavior. Screenshots are written to `test-results/`.
+The browser checks in `scripts/browser-check.mjs` use the installed Google Chrome. With `npm run dev -- --port 5173 --strictPort` running, execute `node scripts/browser-check.mjs`. They verify routes, assets, responsive overflow, menu behavior, service filters, process tabs and form behavior. Run `node scripts/form-delivery-check.mjs` to check contact and career failure, fallback and retry behavior. Set `TEST_BASE_URL` to check the production Node server instead. Browser API responses and the Google Maps frame are intercepted, so these checks do not send real mail or depend on Google being available. The automated mail-server tests exercise an actual local SMTP exchange. Screenshots are written to `test-results/`.

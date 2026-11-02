@@ -1,213 +1,152 @@
 .application-form {
-  padding: 40px;
-  background: #fff;
-  border: 1px solid #e1e5ef;
-  border-radius: 12px;
-  box-shadow: 0 12px 55px #29345d05;
-}
-.application-form__heading {
-  margin-bottom: 30px;
-}
-.application-form__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  color: var(--navy);
-  padding: 7px 10px;
-  border-radius: 4px;
-  background: #f1f2fa;
-  margin-bottom: 18px;
-}
-.application-form__heading h3 {
-  font-size: 28px;
-  font-weight: 600;
-}
-.application-form__heading p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 10px;
-  line-height: 1.8;
-}
-.application-form__heading p > span {
-  color: var(--red);
+  padding: 24px 30px 30px;
 }
 .application-form__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 23px 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 25px 20px;
 }
 .application-field {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 7px;
+  position: relative;
   min-width: 0;
 }
-.application-field--full {
-  grid-column: 1/-1;
-  min-width: 0;
-}
-.application-field label {
-  font-size: 12px;
-  color: #475269;
-  font-weight: 550;
-}
-.application-field label > span {
-  color: var(--red);
-}
-.application-field small {
-  font-size: 9px;
-  font-weight: 400;
-  color: var(--muted);
-  margin-left: 3px;
+.application-field > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 .application-field > input,
 .application-field > select {
-  min-width: 0;
   width: 100%;
-  padding: 13px 14px;
+  min-width: 0;
   min-height: 48px;
-  border: 1px solid #dfe4ee;
-  background: #fcfcfe;
-  color: #44516b;
+  border: 1px solid #d5dae4;
   border-radius: 5px;
+  background: #fff;
+  color: #414c62;
   font-size: 13px;
+  padding: 12px 14px;
   line-height: 1.5;
 }
+.application-field > select {
+  padding-right: 25px;
+}
 .application-field > input::placeholder {
-  color: #a2a9b6;
+  color: #919aaf;
 }
 .application-field > [aria-invalid='true'] {
-  border-color: #c96b75;
-  background: #fffafa;
+  border-color: #bd5b6a;
+  background: #fffafb;
 }
 .application-error {
-  font-size: 11px;
+  font-size: 10px;
   color: #b33548;
   line-height: 1.6;
 }
 .application-upload {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 10px;
   position: relative;
-  border: 1px dashed #bcc3db;
-  background: #fafbfe;
-  padding: 24px 20px;
-  border-radius: 7px;
+  border: 1px solid #d5dae4;
+  background: #fafbfc;
+  border-radius: 5px;
+  min-height: 48px;
+  padding: 12px 14px;
   min-width: 0;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
+  color: #6b7390;
+}
+.application-upload > span {
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 .application-upload:hover {
-  background: #f4f5fc;
-  border-color: var(--navy);
+  border-color: #8a93bc;
+  background: #f5f6fc;
+}
+.application-upload.has-error {
+  border-color: #bd5b6a;
+  background: #fffafb;
 }
 .application-upload:focus-within {
   outline: 3px solid #777cc7;
   outline-offset: 4px;
 }
-.application-upload.has-error {
-  border-color: #c96b75;
-  background: #fffafa;
-}
-.application-upload__icon {
-  color: #707aab;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 45px;
-  flex-shrink: 0;
-}
-.application-upload > div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-.application-upload strong {
-  font-size: 12px;
-  overflow-wrap: anywhere;
-  color: #5b6680;
-  font-weight: 550;
-}
-.application-upload > div > span {
-  font-size: 10px;
-  color: var(--muted);
-}
-.application-upload__browse {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10px;
-  color: var(--navy);
-  margin-left: auto;
-  flex-shrink: 0;
-}
 .application-upload input {
   position: absolute;
   inset: 0;
-  opacity: 0;
   width: 100%;
   height: 100%;
+  opacity: 0;
   cursor: pointer;
 }
-.application-field__help {
+.application-form__help {
   font-size: 10px;
-  color: var(--muted);
-  line-height: 1.7;
+  color: #7b8497;
+  line-height: 1.8;
+  margin-top: 18px;
 }
 .application-consent {
-  margin: 26px 0;
+  margin: 17px 0 24px;
 }
 .application-consent > label {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
+  color: #737d90;
   line-height: 1.9;
 }
 .application-consent input {
-  width: 15px;
-  height: 15px;
-  accent-color: var(--navy);
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   margin: 3px 0 0;
+  accent-color: var(--navy);
 }
 .application-consent a {
+  color: var(--navy);
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: var(--navy);
 }
 .application-consent > .application-error {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
 }
-.application-form__submit {
+.application-form__actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap;
 }
-.application-form__submit > span {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  font-size: 9px;
-  color: var(--muted);
+.application-form__actions .button {
+  min-height: 44px;
+  min-width: 83px;
+  border-radius: 6px;
+  font-size: 13px;
+  padding: 12px 20px;
 }
 .application-result {
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  margin-top: 26px;
-  border: 1px solid #d9dfee;
-  border-radius: 7px;
-  padding: 22px;
+  gap: 12px;
+  border: 1px solid #dce1ef;
+  background: #f7f8fd;
+  border-radius: 6px;
+  padding: 18px;
+  margin-top: 24px;
   color: var(--navy);
-  background: #f6f7fc;
 }
 .application-result > svg {
   margin-top: 2px;
@@ -215,16 +154,16 @@
 .application-result > div {
   min-width: 0;
 }
-.application-result h4 {
-  font-size: 16px;
-  font-weight: 600;
+.application-result h3 {
+  font-size: 15px;
   letter-spacing: -0.025em;
+  font-weight: 600;
 }
 .application-result p {
   font-size: 12px;
-  color: var(--muted);
-  line-height: 1.9;
-  margin-top: 8px;
+  color: #737e92;
+  line-height: 1.8;
+  margin-top: 7px;
 }
 .application-result p strong {
   font-weight: 550;
@@ -234,29 +173,9 @@
   font-size: 12px;
   margin-top: 7px;
 }
-.application-result details {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 8px;
-}
-.application-result summary {
-  cursor: pointer;
-  padding: 5px 0;
-}
-.application-result pre {
-  font-family: Inter, sans-serif;
-  font-size: 11px;
-  line-height: 1.9;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  background: white;
-  border: 1px solid #e4e8f1;
-  border-radius: 5px;
-  padding: 15px;
-}
 .application-result--error {
+  background: #fff7f8;
   border-color: #edcbd3;
-  background: #fff8f9;
   color: #b33548;
 }
 .application-result--success {
@@ -264,63 +183,40 @@
   background: #f1f9f5;
   color: #286442;
 }
-@media (max-width: 950px) {
-  .application-form {
-    padding: 30px;
-  }
-  .application-form__grid {
-    gap: 22px 16px;
-  }
-  .application-upload {
-    padding: 20px 16px;
-    gap: 11px;
-  }
-  .application-upload__browse {
-    font-size: 9px;
-    gap: 6px;
-  }
-}
 @media (max-width: 600px) {
   .application-form {
-    padding: 25px 20px;
-  }
-  .application-form__heading h3 {
-    font-size: 25px;
+    padding: 21px 20px 23px;
   }
   .application-form__grid {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 17px;
   }
   .application-field > input,
   .application-field > select {
     font-size: 16px;
+    min-height: 48px;
+    padding: 12px;
   }
   .application-upload {
-    padding: 22px 14px;
-    gap: 10px;
+    min-height: 48px;
   }
-  .application-upload__icon {
-    width: 30px;
+  .application-upload > span {
+    font-size: 13px;
   }
-  .application-upload__browse {
-    display: none;
-  }
-  .application-upload strong {
-    font-size: 12px;
-  }
-  .application-upload > div > span {
+  .application-form__help {
     font-size: 10px;
   }
-  .application-form__submit {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 16px;
+  .application-consent > label {
+    font-size: 11px;
+  }
+  .application-consent {
+    margin: 17px 0 23px;
+  }
+  .application-error {
+    font-size: 11px;
   }
   .application-result {
-    padding: 18px 14px;
+    padding: 15px;
     gap: 10px;
-  }
-  .application-result h4 {
-    font-size: 15px;
   }
 }

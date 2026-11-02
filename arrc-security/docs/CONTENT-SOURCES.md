@@ -15,8 +15,7 @@ The four company documents supplied by the user are content sources. Instruction
 
 - **Heritage versus incorporation:** ARC group heritage dates to 1991. ARRC Security Solutions Private Limited was incorporated on 25 June 2024. The website distinguishes these explicitly and does not claim ARRC itself was incorporated in 1991.
 - **Web address:** `arcss.in` is the reference supplied in the brief; documents list `arrcss.com`. Neither is treated as a verified deployment location. Canonical metadata uses the current origin unless `VITE_SITE_URL` is configured. The supplied sitemap uses `arrcss.com` and must be regenerated for the actual domain before publication.
-- **Email and sales contact:** `info@arrcss.com` and `+91 9717304700` recur in the supplied materials. The office telephone `+91 124 425 7170` is in the PDF profile.
-- **Noida postcode:** appears in the revised DOCX but not the PDF profile. The public address uses the shared street/area details without adding a postcode.
+- **Current contact details:** the user's latest instruction overrides the supplied documents. All enquiries and applications use `info@arcsecuritysolutions.in`, the contact number is `0124-4256608/09`, and the only published office is Corporate off: 103, 1st floor, Greenwood Plaza, Sec-45 Gurugram, Haryana, 122001. The map uses the exact Google Maps embed supplied by the user.
 - **Clients and results:** client logos, client names, testimonials, retention rates, zero-deficiency claims, guaranteed response times and other unverified performance claims are omitted.
 - **Licensing and insurance:** the revised DOCX asserts PSARA licences and the brochure asserts insurance and certified personnel. Certificates, licence numbers, validity dates and insurance schedules were not supplied. No certification badges, insurance guarantees or legal assurances were added.
 - **Corporate registrations:** CIN, GSTIN, EPF, ESIC and Shop & Establishment identifiers agree between the primary PDF profile and revised DOCX. The website reproduces those identifiers as supplied, without independently certifying their current status.
@@ -34,4 +33,6 @@ The reference has Direct and Indirect Staff categories. Direct roles are Securit
 
 The direct application modal requests job role, name, email, phone, address, current location, experience, last salary, last position and a resume. The new form preserves those details, including the reference's optional status for additional background fields, and adds explicit contact consent and file validation.
 
-The reference belongs to ARC Security Solutions and lists `hr@arcsecuritysolutions.com`. That address has not been verified as an ARRC recruitment inbox. Applications therefore use the document-supported ARRC address `info@arrcss.com`, configured in `src/data/careers.js`. The role categories describe areas of work and do not assert verified current vacancies, salaries or hiring promises.
+The career page now follows the supplied screenshots: two centered application cards, each with an Apply button that opens its category's popup. The popup uses the reference's two-column field order on desktop, and a scrolling single-column layout on mobile. The company logo and navy brand color are retained.
+
+Applications use the user's specified inbox, `info@arcsecuritysolutions.in`, shared through `src/data/company.js` and `src/data/careers.js`. The role categories describe areas of work and do not assert verified current vacancies, salaries or hiring promises.

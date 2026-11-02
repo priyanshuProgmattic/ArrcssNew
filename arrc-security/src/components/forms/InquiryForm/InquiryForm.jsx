@@ -12,7 +12,7 @@ export default function InquiryForm({ isQuote = false }) {
   const [searchParams] = useSearchParams();
   const requested = searchParams.get('service');
   const industry = industries.find((item) => item.slug === searchParams.get('industry'));
-  const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim();
+  const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim() || '/api/enquiry';
   const schema = useMemo(() => createInquirySchema(isQuote), [isQuote]);
   const {
     register,
@@ -40,17 +40,8 @@ export default function InquiryForm({ isQuote = false }) {
   async function submit(values) {
     setStatus(null);
     setDraft(null);
-    if (!endpoint) {
-      setDraft(buildEmailDraft(values));
-      setStatus({
-        type: 'draft',
-        message:
-          'Your enquiry is ready to review. Open the draft in your email app and send it to our team.',
-      });
-      return;
-    }
     try {
-      await sendInquiry(endpoint, values);
+      await sendInquiry(endpoint, { ...values, formType: isQuote ? 'quote' : 'contact' });
       setStatus({
         type: 'success',
         message: 'Your enquiry has been received. Thank you for contacting ARRC.',
@@ -58,6 +49,7 @@ export default function InquiryForm({ isQuote = false }) {
       reset();
     } catch (error) {
       setStatus({ type: 'error', message: error.message });
+      setDraft(buildEmailDraft(values));
     }
   }
   function field(name, label, options = {}) {
@@ -90,11 +82,7 @@ export default function InquiryForm({ isQuote = false }) {
     <form className="inquiry-form" onSubmit={handleSubmit(submit)} noValidate>
       <div className="inquiry-form__heading">
         <h2>{isQuote ? 'Tell us what you have in mind.' : 'Start a conversation.'}</h2>
-        <p>
-          {endpoint
-            ? 'Share your requirements and our team can help you plan the next step.'
-            : 'Fill in your details to prepare an email enquiry for our team.'}
-        </p>
+        <p>Share your requirements and our team can help you plan the next step.</p>
       </div>
       <div className="inquiry-form__grid">
         {field('fullName', 'Full name', { autoComplete: 'name', placeholder: 'Your full name' })}
@@ -232,7 +220,7 @@ export default function InquiryForm({ isQuote = false }) {
           disabled={isSubmitting}
           icon={isSubmitting ? 'Clock3' : 'ArrowUpRight'}
         >
-          {isSubmitting ? 'Sending enquiry…' : endpoint ? 'Send enquiry' : 'Prepare email enquiry'}
+          {isSubmitting ? 'Sending enquiry…' : 'Send enquiry'}
         </Button>
         <span>
           <Icon name="LockKeyhole" size={13} />
@@ -250,7 +238,7 @@ export default function InquiryForm({ isQuote = false }) {
             {draft && (
               <>
                 <p className="form-notice__delivery">
-                  No message has been sent yet. Sending requires an email app.
+                  You can also send your enquiry using your email app.
                 </p>
                 <a className="text-link" href={draft.href}>
                   Open email draft

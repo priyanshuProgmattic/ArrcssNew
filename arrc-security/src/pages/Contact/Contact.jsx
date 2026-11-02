@@ -40,9 +40,6 @@ export default function Contact() {
               <div>
                 <h3>Speak to our team</h3>
                 <a href={`tel:${company.salesTel}`}>{company.salesPhone}</a>
-                <a href={`tel:${company.officeTel}`}>
-                  {company.officePhone} <small>Office</small>
-                </a>
               </div>
             </div>
             <div className="contact-method">
@@ -59,8 +56,8 @@ export default function Contact() {
                 <Icon name="MapPin" size={23} />
               </span>
               <div>
-                <h3>Corporate office</h3>
-                <p>{company.offices[1].address}</p>
+                <h3>{company.offices[0].label}</h3>
+                <p>{company.offices[0].address}</p>
               </div>
             </div>
             <div className="contact-page__note">

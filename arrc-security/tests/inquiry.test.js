@@ -51,7 +51,7 @@ test('email draft safely encodes the requirements and has no submission side eff
   });
   const url = new URL(draft.href);
   assert.equal(url.protocol, 'mailto:');
-  assert.equal(url.pathname, 'info@arrcss.com');
+  assert.equal(url.pathname, 'info@arcsecuritysolutions.in');
   assert.match(url.searchParams.get('body'), /access control & security/);
   assert.match(url.searchParams.get('subject'), /Manned Guarding/);
 });

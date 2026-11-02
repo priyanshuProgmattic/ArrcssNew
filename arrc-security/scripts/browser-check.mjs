@@ -25,6 +25,15 @@ const report = { routes: [], responsive: [], interactions: [], issues };
 await mkdir('test-results', { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const submissions = [];
+await page.route(/\/api\/(enquiry|careers)$/, async (route) => {
+  submissions.push({ url: route.request().url(), body: route.request().postData() });
+  await route.fulfill({ json: { success: true } });
+});
+// Check the supplied iframe and sizing without depending on Google's availability.
+await page.route('https://www.google.com/maps/embed?*', (route) =>
+  route.fulfill({ contentType: 'text/html', body: '<!doctype html><title>Map fixture</title>' }),
+);
 page.on('pageerror', (error) => issues.push(`Runtime: ${error.message}`));
 page.on('console', (message) => {
   if (message.type() === 'error') issues.push(`Console: ${message.text()}`);
@@ -101,7 +110,7 @@ try {
 
   await load('/request-quote?service=facility-management');
   await expect(page.getByLabel('Service required')).toHaveValue('facility-management');
-  await page.getByRole('button', { name: 'Prepare email enquiry' }).click();
+  await page.getByRole('button', { name: 'Send enquiry' }).click();
   await expect(page.getByText('Enter your full name.', { exact: true })).toBeVisible();
   await expect(page.getByLabel('Full name')).toBeFocused();
   await page.getByLabel('Full name').fill('Asha Sharma');
@@ -115,28 +124,48 @@ try {
     .getByLabel('Your requirements')
     .fill('Please discuss housekeeping and facility support for our office.');
   await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: 'Prepare email enquiry' }).click();
-  await expect(page.getByRole('status')).toContainText('No message has been sent yet');
-  await expect(page.getByRole('link', { name: 'Open email draft' })).toHaveAttribute(
-    'href',
-    /^mailto:info@arrcss.com\?/,
-  );
+  await page.getByRole('button', { name: 'Send enquiry' }).click();
+  await expect(page.getByRole('status')).toContainText('Your enquiry has been received');
+  expect(JSON.parse(submissions.at(-1).body)).toMatchObject({
+    formType: 'quote',
+    service: 'facility-management',
+    personnel: '8',
+    location: 'Gurugram',
+  });
+  await expect(page.getByLabel('Full name')).toHaveValue('');
   report.interactions.push(
-    'Quote preselection, required-field validation and honest email draft flow',
+    'Quote preselection, required-field validation, API payload, confirmation and form reset',
   );
   await load('/contact-us');
-  await expect(page.locator('.office-map iframe')).toHaveCount(0);
-  await page.getByRole('button', { name: /Registered office Delhi/ }).click();
-  await expect(page.locator('.office-map h3')).toContainText('Delhi');
+  await expect(page.locator('.office-locations__office')).toHaveCount(1);
+  await expect(page.locator('.office-locations__office')).toContainText('103, 1st floor');
+  await expect(page.locator('.office-map iframe')).toHaveAttribute('src', /!2sARC%20Security/);
+  await expect(page.locator('.office-map iframe')).toHaveAttribute(
+    'referrerpolicy',
+    'strict-origin-when-cross-origin',
+  );
+  await expect(page.locator('.contact-page__details a[href^="tel:"]')).toHaveText(
+    '0124-4256608/09',
+  );
+  const organization = await page.locator('#company-structured-data').textContent();
+  expect(JSON.parse(organization).address).toMatchObject({
+    streetAddress: '103, 1st floor, Greenwood Plaza, Sec-45',
+    addressLocality: 'Gurugram',
+    addressRegion: 'Haryana',
+    postalCode: '122001',
+  });
+  expect(JSON.parse(organization).email).toBe('info@arcsecuritysolutions.in');
   await expect(page.getByRole('link', { name: 'Get directions' })).toHaveAttribute(
     'href',
-    /Ghitorni/,
+    /ARC%20Security.*Gurugram/,
   );
-  report.interactions.push('Office selection and maps withheld until requested');
+  report.interactions.push(
+    'Single corporate office, contact details, metadata and supplied map embed',
+  );
 
   for (const width of [320, 375, 390, 480, 768, 1024, 1280, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of ['/', '/services', '/request-quote', '/careers']) {
+    for (const route of ['/', '/services', '/contact-us', '/request-quote', '/careers']) {
       await load(route);
       await noOverflow(`${route} at ${width}px`);
     }
@@ -164,9 +193,38 @@ try {
     animations: 'disabled',
     fullPage: true,
   });
-  await page.getByRole('button', { name: 'Apply for indirect staff', exact: true }).click();
+  await expect(page.locator('.careers-page form')).toHaveCount(0);
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  const directApply = page.getByRole('button', { name: 'Apply for direct staff', exact: true });
+  await directApply.click();
+  const applicationDialog = page.getByRole('dialog', { name: 'Apply for a job', exact: true });
+  await expect(applicationDialog).toBeVisible();
+  await expect(page.getByLabel('Job role (required)', { exact: true })).toBeFocused();
   await expect(page.locator('#application-designation option')).toHaveText([
-    'Choose a role',
+    'Select job role',
+    'Security Guards',
+    'Supervisors',
+    'ASO',
+    'SO',
+    'Gunman-Civilian',
+    'Ex-serviceman',
+    'Ex-Service Man Training Officer',
+    'PSO',
+    'Facility Staff',
+  ]);
+  await page.getByRole('button', { name: 'Cancel', exact: true }).focus();
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'Close application', exact: true })).toBeFocused();
+  await page.screenshot({ path: 'test-results/careers-popup-mobile.png', animations: 'disabled' });
+  await page.keyboard.press('Escape');
+  await expect(applicationDialog).toHaveCount(0);
+  await expect(directApply).toBeFocused();
+  expect(await page.evaluate(() => document.body.style.overflow)).not.toBe('hidden');
+
+  await page.getByRole('button', { name: 'Apply for indirect staff', exact: true }).click();
+  await expect(applicationDialog).toBeVisible();
+  await expect(page.locator('#application-designation option')).toHaveText([
+    'Select job role',
     'Management Staff',
     'Sales',
     'Accounts & Finance',
@@ -175,43 +233,42 @@ try {
     'HR',
     'CRM',
   ]);
-  await page.getByRole('button', { name: 'Prepare application', exact: true }).click();
+  await page.getByRole('button', { name: 'Submit', exact: true }).click();
   await expect(
     page.getByText('Choose the role you are applying for.', { exact: true }),
   ).toBeVisible();
-  await page.getByLabel('Applying for').selectOption('HR');
-  await page.getByLabel('Full name').fill('Asha Sharma');
-  await page.getByLabel('Email address').fill('asha@example.com');
+  await page.getByLabel('Job role (required)', { exact: true }).selectOption('HR');
+  await page.getByLabel('Your name').fill('Asha Sharma');
+  await page.getByLabel('Email (required)', { exact: true }).fill('asha@example.com');
   await page.getByLabel('Phone number').fill('+91 98765 43210');
-  await page
-    .getByLabel('Upload resume')
-    .setInputFiles({
-      name: 'resume.exe',
-      mimeType: 'application/octet-stream',
-      buffer: Buffer.from('invalid'),
-    });
+  await page.getByLabel('Upload resume').setInputFiles({
+    name: 'resume.exe',
+    mimeType: 'application/octet-stream',
+    buffer: Buffer.from('invalid'),
+  });
   await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: 'Prepare application', exact: true }).click();
+  await page.getByRole('button', { name: 'Submit', exact: true }).click();
   await expect(page.getByText('Choose a PDF, DOC or DOCX resume.', { exact: true })).toBeVisible();
-  await page
-    .getByLabel('Upload resume')
-    .setInputFiles({
-      name: 'asha-resume.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('%PDF-1.4 sample resume'),
-    });
-  await page.getByRole('button', { name: 'Prepare application', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('Nothing has been sent or uploaded yet');
-  await expect(page.getByRole('link', { name: 'Open application email' })).toHaveAttribute(
-    'href',
-    /^mailto:info@arrcss.com\?/,
-  );
-  await page.getByRole('button', { name: 'Direct staff', exact: true }).click();
-  await expect(page.getByLabel('Applying for')).toHaveValue('');
+  await page.getByLabel('Upload resume').setInputFiles({
+    name: 'asha-resume.pdf',
+    mimeType: 'application/pdf',
+    buffer: Buffer.from('%PDF-1.4 sample resume'),
+  });
+  await page.getByRole('button', { name: 'Submit', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('Your application has been received');
+  expect(submissions.at(-1).url).toContain('/api/careers');
+  expect(submissions.at(-1).body).toContain('filename="asha-resume.pdf"');
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(applicationDialog).toHaveCount(0);
+  await directApply.click();
+  await expect(page.getByLabel('Job role (required)', { exact: true })).toHaveValue('');
   await expect(page.locator('#application-designation option')).toContainText(['Security Guards']);
   await expect(page.getByRole('status')).toHaveCount(0);
+  await expect(page.getByLabel('Your name')).toHaveValue('');
+  await page.getByRole('button', { name: 'Close application', exact: true }).click();
+  await expect(applicationDialog).toHaveCount(0);
   report.interactions.push(
-    'Career application categories, required fields, resume validation and email draft',
+    'Two career popups, matching job dropdowns, focus containment and return, Escape, Cancel, form reset, validation and resume submission',
   );
 
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -223,6 +280,20 @@ try {
     fullPage: true,
   });
   await page.screenshot({ path: 'test-results/careers-desktop-top.png', animations: 'disabled' });
+  await directApply.click();
+  await expect(applicationDialog).toBeVisible();
+  await page.screenshot({ path: 'test-results/careers-popup-desktop.png', animations: 'disabled' });
+  await page.mouse.click(4, 4);
+  await expect(applicationDialog).toHaveCount(0);
+  await page.getByRole('button', { name: 'Apply for indirect staff', exact: true }).click();
+  await expect(applicationDialog).toBeVisible();
+  await page.screenshot({
+    path: 'test-results/careers-popup-indirect.png',
+    animations: 'disabled',
+  });
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(applicationDialog).toHaveCount(0);
+  report.interactions.push('Desktop career popup sizing and backdrop dismissal');
 
   await page.setViewportSize({ width: 390, height: 844 });
 

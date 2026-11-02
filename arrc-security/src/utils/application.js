@@ -84,6 +84,7 @@ export function buildApplicationDraft(values, teamId) {
     .filter((value) => value !== false && value !== undefined)
     .join('\n');
   return {
+    subject,
     body,
     href: `mailto:${careers.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
     resumeName: resume.name,
@@ -99,7 +100,7 @@ export async function sendApplication(endpoint, values, teamId, fetcher = fetch)
   data.append('resume', values.resume[0]);
   data.append('source', 'arrc-careers');
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000);
+  const timeout = setTimeout(() => controller.abort(), 30000);
   try {
     const response = await fetcher(endpoint, {
       method: 'POST',

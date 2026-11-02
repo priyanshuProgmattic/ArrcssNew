@@ -27,6 +27,7 @@ export default function Header() {
   useEffect(() => {
     const close = (event) => {
       if (event.key !== 'Escape') return;
+      if (event.target.closest?.('dialog[open]')) return;
       const trigger = event.target.closest?.('.has-menu')?.querySelector('.nav-menu-toggle');
       setActiveMenu(null);
       if (trigger) trigger.focus();

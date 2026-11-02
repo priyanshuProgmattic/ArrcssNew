@@ -56,7 +56,7 @@ test('email application preserves details and requires the applicant to attach t
   const draft = buildApplicationDraft(application, 'direct');
   const url = new URL(draft.href);
   assert.equal(url.protocol, 'mailto:');
-  assert.equal(url.pathname, 'info@arrcss.com');
+  assert.equal(url.pathname, 'info@arcsecuritysolutions.in');
   assert.match(url.searchParams.get('body'), /Resume to attach: asha-resume.pdf/);
   assert.match(url.searchParams.get('subject'), /Security Guards/);
 });
