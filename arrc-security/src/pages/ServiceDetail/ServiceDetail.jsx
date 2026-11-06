@@ -20,7 +20,7 @@ export default function ServiceDetail() {
         description={service.description}
         image={service.image}
         imageAlt={
-          service.image === 'security-lobby.jpg'
+          service.image === 'security-lobby.jpeg'
             ? 'Security staff at a building reception desk'
             : 'A professional commercial environment'
         }

@@ -36,7 +36,7 @@ export default function Hero() {
         <div className="hero__visual reveal">
           <ResponsiveImage
             className="hero__photo"
-            src="/assets/images/corporate-building.jpg"
+            src="/assets/images/corporate-building.jpeg"
             alt="Modern glass office towers rising toward an open sky"
             width="1600"
             height="2000"

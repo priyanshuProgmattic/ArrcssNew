@@ -17,7 +17,7 @@ export default function Contact() {
           </>
         }
         description="A question, a new site or a fresh approach to your operations. We're here to help you take the next step."
-        image="workplace.jpg"
+        image="workplace.jpeg"
         imageAlt="A bright professional environment for a conversation"
       />
       <section className="section">

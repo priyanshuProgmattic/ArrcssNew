@@ -18,7 +18,7 @@ export default function Operations() {
           </>
         }
         description="A structured approach to selection, training, deployment and supervision. Because consistency comes from preparation."
-        image="security-lobby.jpg"
+        image="security-lobby.jpeg"
         imageAlt="Security personnel working at a monitored reception desk"
       />
       <section className="section surface">
@@ -69,7 +69,7 @@ export default function Operations() {
       <section className="section surface">
         <div className="container grid-2 operations-training">
           <ResponsiveImage
-            src="/assets/images/team.jpg"
+            src="/assets/images/team.jpeg"
             alt="Professionals collaborating on workplace planning"
             loading="lazy"
             width="800"

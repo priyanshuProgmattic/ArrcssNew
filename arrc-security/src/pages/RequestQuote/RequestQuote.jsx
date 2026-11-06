@@ -16,7 +16,7 @@ export default function RequestQuote() {
           </>
         }
         description="Tell us about your site, your team and the support you're looking for. Let's shape an approach around your requirements."
-        image="workplace.jpg"
+        image="workplace.jpeg"
         imageAlt="A professional workspace ready for its team"
       />
       <section className="section">

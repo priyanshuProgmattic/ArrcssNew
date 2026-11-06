@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
           </>
         }
         description="In the attention we give your site. In the people we select. In the responsibilities we take seriously."
-        image="workplace.jpg"
+        image="workplace.jpeg"
         imageAlt="A welcoming and carefully maintained workplace"
       />
       <section className="section">

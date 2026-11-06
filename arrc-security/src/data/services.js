@@ -5,7 +5,7 @@ export const services = [
     shortTitle: 'Manned security',
     icon: 'ShieldCheck',
     category: 'Security services',
-    image: 'security-lobby.jpg',
+    image: 'security-lobby.jpeg',
     description:
       'A professional presence. A safer environment. Trained security personnel, with responsibilities shaped around your premises.',
     introduction:
@@ -31,7 +31,7 @@ export const services = [
     shortTitle: 'Escort security',
     icon: 'CarFront',
     category: 'Security services',
-    image: 'corporate-building.jpg',
+    image: 'corporate-building.jpeg',
     description:
       'Thoughtful protection for employee journeys, with professional escort personnel and clearly defined travel protocols.',
     introduction:
@@ -57,7 +57,7 @@ export const services = [
     shortTitle: 'Personal protection',
     icon: 'UserRoundCheck',
     category: 'Security services',
-    image: 'security-lobby.jpg',
+    image: 'security-lobby.jpeg',
     description:
       'Discreet, disciplined personal security for executives, individuals and environments that need a specialist presence.',
     introduction:
@@ -83,7 +83,7 @@ export const services = [
     shortTitle: 'Event security',
     icon: 'TicketCheck',
     category: 'Security services',
-    image: 'workplace.jpg',
+    image: 'workplace.jpeg',
     description:
       'From the first arrival to the final departure, coordinated security that keeps your event moving.',
     introduction:
@@ -109,7 +109,7 @@ export const services = [
     shortTitle: 'Facility management',
     icon: 'Building2',
     category: 'Integrated support',
-    image: 'workplace.jpg',
+    image: 'workplace.jpeg',
     description:
       'Clean, cared-for spaces that work as hard as you do. Coordinated housekeeping and everyday facility support.',
     introduction:
@@ -135,7 +135,7 @@ export const services = [
     shortTitle: 'Manpower solutions',
     icon: 'UsersRound',
     category: 'Integrated support',
-    image: 'team.jpg',
+    image: 'team.jpeg',
     description:
       'The right people for your everyday operations. Flexible skilled and unskilled staffing, managed through one partner.',
     introduction:
@@ -161,7 +161,7 @@ export const services = [
     shortTitle: 'Smart security',
     icon: 'Cctv',
     category: 'Technology',
-    image: 'corporate-building.jpg',
+    image: 'corporate-building.jpeg',
     description:
       'Greater visibility into your security operation through digital patrols, attendance and location-supported monitoring.',
     introduction:

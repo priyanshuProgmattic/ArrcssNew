@@ -17,7 +17,7 @@ export default function About() {
           </>
         }
         description="Professional security. Connected services. A client-first approach to the things that matter to your business."
-        image="workplace.jpg"
+        image="workplace.jpeg"
         imageAlt="A bright and carefully maintained shared workplace"
       />
       <section className="section">
@@ -138,7 +138,7 @@ export default function About() {
       <section className="section surface">
         <div className="container grid-2 about-approach">
           <ResponsiveImage
-            src="/assets/images/security-lobby.jpg"
+            src="/assets/images/security-lobby.jpeg"
             alt="Security personnel monitoring an office lobby from the reception desk"
             loading="lazy"
             width="700"

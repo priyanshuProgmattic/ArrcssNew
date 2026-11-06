@@ -6,7 +6,7 @@ export default function PageHero({
   eyebrow,
   title,
   description,
-  image = 'corporate-building.jpg',
+  image = 'corporate-building.jpeg',
   imageAlt = 'Glass facade of a modern commercial building',
 }) {
   return (

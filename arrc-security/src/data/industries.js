@@ -3,7 +3,7 @@ export const industries = [
     slug: 'corporate',
     title: 'Corporate Offices',
     icon: 'Building2',
-    image: 'corporate-building.jpg',
+    image: 'corporate-building.jpeg',
     description:
       'A welcoming first impression, with visitor management, professional guarding, employee escort arrangements and coordinated workplace support.',
     services: ['manned-guarding', 'escort-security', 'facility-management'],
@@ -12,7 +12,7 @@ export const industries = [
     slug: 'retail',
     title: 'Retail & Shopping Malls',
     icon: 'ShoppingBag',
-    image: 'workplace.jpg',
+    image: 'workplace.jpeg',
     description:
       'Support for busy public environments through visible guarding, entry management, crowd coordination and housekeeping.',
     services: ['manned-guarding', 'event-security', 'facility-management'],
@@ -21,7 +21,7 @@ export const industries = [
     slug: 'residential',
     title: 'Residential Communities',
     icon: 'House',
-    image: 'residential.jpg',
+    image: 'residential.jpeg',
     description:
       'Considered security for everyday living, from gate protocols and visitor registers to perimeter patrols and common-area care.',
     services: ['manned-guarding', 'facility-management'],
@@ -30,7 +30,7 @@ export const industries = [
     slug: 'education',
     title: 'Educational Institutions',
     icon: 'GraduationCap',
-    image: 'corporate-building.jpg',
+    image: 'corporate-building.jpeg',
     description:
       'Site-specific gate discipline, visitor screening, patrol responsibilities and emergency procedures for campus environments.',
     services: ['manned-guarding', 'manpower-services'],
@@ -39,7 +39,7 @@ export const industries = [
     slug: 'industrial',
     title: 'Industrial Facilities',
     icon: 'Factory',
-    image: 'warehouse.jpg',
+    image: 'warehouse.jpeg',
     description:
       'Guarding and workforce support built around controlled access, shift movements, material gates and operational requirements.',
     services: ['manned-guarding', 'manpower-services', 'smart-security'],
@@ -48,7 +48,7 @@ export const industries = [
     slug: 'logistics',
     title: 'Warehouses & Logistics',
     icon: 'Warehouse',
-    image: 'warehouse.jpg',
+    image: 'warehouse.jpeg',
     description:
       'Attention to entry points, goods movement, patrol routes and documented handovers across storage and distribution spaces.',
     services: ['manned-guarding', 'smart-security'],
@@ -57,7 +57,7 @@ export const industries = [
     slug: 'events',
     title: 'Events & Venues',
     icon: 'TicketCheck',
-    image: 'team.jpg',
+    image: 'team.jpeg',
     description:
       'A coordinated approach to guest arrivals, access points and crowd flow, tailored to the venue and event schedule.',
     services: ['event-security', 'personal-protection'],
@@ -66,7 +66,7 @@ export const industries = [
     slug: 'commercial',
     title: 'Commercial Properties',
     icon: 'Landmark',
-    image: 'workplace.jpg',
+    image: 'workplace.jpeg',
     description:
       'Integrated security, cleaning and support personnel for shared environments with multiple occupiers and everyday visitors.',
     services: ['manned-guarding', 'facility-management', 'manpower-services'],

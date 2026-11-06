@@ -10,10 +10,10 @@ export default function ResponsiveImage({
     typeof src === 'string' && src.startsWith('/assets/images/') && src.endsWith('.jpg');
   const base = isPhoto ? src.slice(0, -4) : null;
   const widths = {
-    'team.jpg': 800,
-    'warehouse.jpg': 900,
-    'workplace.jpg': 1200,
-    'residential.jpg': 1000,
+    'team.jpeg': 800,
+    'warehouse.jpeg': 900,
+    'workplace.jpeg': 1200,
+    'residential.jpeg': 1000,
   };
   const originalWidth = isPhoto ? widths[src.split('/').pop()] || 1600 : null;
   const sources = isPhoto

@@ -8,7 +8,7 @@ export default function Introduction() {
       <div className="container introduction__grid">
         <div className="introduction__visual">
           <ResponsiveImage
-            src="/assets/images/workplace.jpg"
+            src="/assets/images/workplace.jpeg"
             alt="A light-filled, thoughtfully maintained modern workplace"
             loading="lazy"
             width="700"

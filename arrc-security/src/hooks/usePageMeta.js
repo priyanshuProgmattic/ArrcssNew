@@ -72,7 +72,7 @@ export default function usePageMeta() {
     const origin = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, '');
     const url = `${origin}${pathname}`;
     meta('og:url', url, 'property');
-    meta('og:image', `${origin}/assets/images/corporate-building.jpg`, 'property');
+    meta('og:image', `${origin}/assets/images/corporate-building.jpeg`, 'property');
     meta('robots', pages[pathname] || service ? 'index,follow' : 'noindex,follow');
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {

@@ -52,7 +52,7 @@ export default function Services() {
       <section className="section surface">
         <div className="container grid-2 services-integrated">
           <ResponsiveImage
-            src="/assets/images/workplace.jpg"
+            src="/assets/images/workplace.jpeg"
             alt="An open and organized professional workspace"
             loading="lazy"
             width="700"
