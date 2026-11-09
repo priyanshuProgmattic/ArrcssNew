@@ -12,7 +12,7 @@ import Icon from '../../common/Icon/Icon';
 import './ApplicationForm.css';
 
 export default function ApplicationForm({ category }) {
-  const endpoint = import.meta.env.VITE_CAREERS_ENDPOINT?.trim();
+  const endpoint = import.meta.env.VITE_CAREERS_ENDPOINT?.trim() || '/api/careers';
   const schema = useMemo(() => createApplicationSchema(category.id), [category.id]);
   const {
     register,

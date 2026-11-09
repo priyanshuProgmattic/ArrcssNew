@@ -12,7 +12,7 @@ export default function InquiryForm({ isQuote = false }) {
   const [searchParams] = useSearchParams();
   const requested = searchParams.get('service');
   const industry = industries.find((item) => item.slug === searchParams.get('industry'));
-  const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim();
+  const endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT?.trim() || '/api/enquiry';
   const schema = useMemo(() => createInquirySchema(isQuote), [isQuote]);
   const {
     register,
@@ -50,7 +50,7 @@ export default function InquiryForm({ isQuote = false }) {
       return;
     }
     try {
-      await sendInquiry(endpoint, values);
+      await sendInquiry(endpoint, { ...values, inquiryType: isQuote ? 'quote' : 'contact' });
       setStatus({
         type: 'success',
         message: 'Your enquiry has been received. Thank you for contacting ARRC.',

@@ -28,16 +28,9 @@ export default function PrivacyPolicy() {
           </p>
           <h2>How enquiries work</h2>
           <p>
-            By default, the form prepares an email draft on your device. The website does not submit
-            that enquiry to a company server. You review and send the draft using your chosen email
-            application, whose provider processes the email under its own terms.
-          </p>
-          <p>
-            If a company enquiry endpoint is configured, the form sends the information you provide
-            to that endpoint to process your request and contact you. The website only confirms
-            receipt after the endpoint explicitly confirms success. The company must document its
-            service provider, access controls and retention arrangements before enabling that
-            integration.
+            When you submit an enquiry, the website sends your details to our server and emails
+            them to the ARRC team through our configured email provider. Receipt is confirmed only
+            after the email server accepts the message. We use these details to respond to your request.
           </p>
           <h2>Career applications and resumes</h2>
           <p>
@@ -46,11 +39,9 @@ export default function PrivacyPolicy() {
             recent position or employer. These additional details are optional.
           </p>
           <p>
-            By default, the careers form prepares an email draft. Selecting a resume does not upload
-            it. You must attach that file in your email app before sending your application. If a
-            recruitment endpoint is configured, the form sends your application details and selected
-            resume to that endpoint after you choose to submit. The company must review recruitment
-            access, processing and retention arrangements before enabling that service.
+            When you submit an application, your details and selected resume are uploaded to our
+            server and emailed to our recruitment team. We use these details to assess your application
+            and contact you. Resumes are limited to 5 MB and PDF, DOC or DOCX formats.
           </p>
           <h2>Local storage, cookies and analytics</h2>
           <p>

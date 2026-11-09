@@ -88,7 +88,7 @@ export function buildEmailDraft(values) {
 
 export async function sendInquiry(endpoint, values, fetcher = fetch) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), 45000);
   try {
     const response = await fetcher(endpoint, {
       method: 'POST',

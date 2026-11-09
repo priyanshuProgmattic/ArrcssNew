@@ -91,3 +91,11 @@ npm run build
 ```
 
 The browser checks in `scripts/browser-check.mjs` use the installed Google Chrome. With `npm run dev -- --port 5173 --strictPort` running, execute `node scripts/browser-check.mjs`. They verify routes, assets, responsive overflow, menu behavior, service filters, process tabs and form behavior. Screenshots are written to `test-results/`.
+
+## SMTP email server
+
+Use Node.js 22 or newer. Run `npm install`, configure server-only SMTP settings in `.env.local` (see `.env.example`), then run `npm run dev`. The mail API runs inside Vite, so no separate backend process is needed during development. Contact, quote, and both career forms send email to `SMTP_TO`, with the visitor as Reply-To. Career resumes are attached. Credentials stay on the server.
+
+For production run `npm run build` then `npm start`; deploy the Node server, which serves both `dist` and the API. Static-only hosting cannot send SMTP mail. Use an HTTPS reverse proxy in production. `npm run preview` includes the mail API as well.
+
+Run `npm run test:mail -- recipient@example.com` to authenticate and send four real test messages through the form APIs (contact, quote, direct and indirect careers). This overrides the recipient for that test process only. SMTP acceptance confirms handoff to the provider; check the recipient inbox and spam folder for final delivery.
