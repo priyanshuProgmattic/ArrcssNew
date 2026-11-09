@@ -81,3 +81,22 @@ test('direct application submission includes the resume and waits for confirmati
     /not confirmed/,
   );
 });
+
+test('career delivery errors preserve the server message and the configured fallback inbox', async () => {
+  const recipient = 'priyanshukashyap844@gmail.com';
+  const message = `Your message could not be sent. Please email ${recipient}.`;
+  await assert.rejects(
+    sendApplication('/api/careers', application, 'direct', async () => ({
+      ok: false,
+      json: async () => ({ success: false, message, recipient }),
+    })),
+    (error) => {
+      assert.equal(error.message, message);
+      assert.equal(
+        new URL(buildApplicationDraft(application, 'direct', error.recipient).href).pathname,
+        recipient,
+      );
+      return true;
+    },
+  );
+});

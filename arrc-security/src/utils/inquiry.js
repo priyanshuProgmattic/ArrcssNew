@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { services } from '../data/services.js';
-import { company } from '../data/company.js';
+import { formRecipient, readFormResponse } from './form-response.js';
 
 const phone = z
   .string()
@@ -56,7 +56,7 @@ export function createInquirySchema(isQuote = false) {
   return z.object(schema);
 }
 
-export function buildEmailDraft(values) {
+export function buildEmailDraft(values, recipient = formRecipient) {
   const title =
     services.find((service) => service.slug === values.service)?.title || 'Integrated services';
   const subject = `Website enquiry — ${title}`;
@@ -82,7 +82,7 @@ export function buildEmailDraft(values) {
   return {
     subject,
     body,
-    href: `mailto:${company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    href: `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
   };
 }
 
@@ -96,14 +96,11 @@ export async function sendInquiry(endpoint, values, fetcher = fetch) {
       body: JSON.stringify({ ...values, source: 'arrc-website' }),
       signal: controller.signal,
     });
-    if (!response.ok)
-      throw new Error(
-        'The enquiry service could not accept your message. Please try again or contact us directly.',
-      );
-    const result = await response.json();
-    if (result.success !== true)
-      throw new Error('Delivery was not confirmed. Please contact us by phone or email.');
-    return result;
+    return await readFormResponse(
+      response,
+      'The enquiry service could not accept your message. Please try again or contact us directly.',
+      'Delivery was not confirmed. Please contact us by phone or email.',
+    );
   } catch (error) {
     if (error.name === 'AbortError')
       throw new Error('The request timed out. Please try again or contact us directly.');

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { careerCategories, careers } from '../data/careers.js';
+import { careerCategories } from '../data/careers.js';
+import { formRecipient, readFormResponse } from './form-response.js';
 
 export const MAX_RESUME_SIZE = 5 * 1024 * 1024;
 const resumeTypes = {
@@ -58,7 +59,7 @@ export function createApplicationSchema(teamId) {
   });
 }
 
-export function buildApplicationDraft(values, teamId) {
+export function buildApplicationDraft(values, teamId, recipient = formRecipient) {
   const team = careerCategories.find((category) => category.id === teamId);
   const resume = values.resume?.[0];
   const subject = `Career application — ${values.designation}`;
@@ -86,7 +87,7 @@ export function buildApplicationDraft(values, teamId) {
   return {
     subject,
     body,
-    href: `mailto:${careers.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    href: `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
     resumeName: resume.name,
   };
 }
@@ -108,14 +109,11 @@ export async function sendApplication(endpoint, values, teamId, fetcher = fetch)
       body: data,
       signal: controller.signal,
     });
-    if (!response.ok)
-      throw new Error(
-        'Your application could not be accepted. Please try again or email our team.',
-      );
-    const result = await response.json();
-    if (result.success !== true)
-      throw new Error('Receipt was not confirmed. Please try again or email our team.');
-    return result;
+    return await readFormResponse(
+      response,
+      'Your application could not be accepted. Please try again or email our team.',
+      'Receipt was not confirmed. Please try again or email our team.',
+    );
   } catch (error) {
     if (error.name === 'AbortError')
       throw new Error('The upload timed out. Please try again or apply by email.');

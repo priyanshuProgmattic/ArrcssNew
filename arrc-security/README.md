@@ -63,11 +63,15 @@ Home, About Us, Services, seven service detail routes, Operations, Technology, I
 
 ## Enquiries and integrations
 
-Contact, quote and career forms submit to the included Node.js backend and email `info@arcsecuritysolutions.in`. Career resumes are attached to the email. The recipient is set on the server; visitors cannot change it. The server validates submissions, limits request sizes and allows ten attempts per IP address per fifteen minutes.
+Contact, quote and career forms submit to the included Node.js backend and email `info@arcsecuritysolutions.in`. The local and example configurations use this company inbox for every form. Set the server-only `SMTP_TO` to override the recipient when testing. Career resumes are attached to the email. The recipient is set on the server; visitors cannot change it. The server validates submissions, limits request sizes and allows ten attempts per IP address per fifteen minutes.
 
 Copy `.env.example` to `.env.local` and set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` and `SMTP_FROM` using your mail provider's settings. Use port 587 with `SMTP_SECURE=false` for STARTTLS, or port 465 with `SMTP_SECURE=true` for implicit TLS. `SMTP_FROM` must be authorized by your provider; replies go to the visitor's email address. SMTP settings are server-only and must never use the `VITE_` prefix. Restart the server after changing them. See [EMAIL-SETUP.md](docs/EMAIL-SETUP.md).
 
+The current configuration uses Gmail. Enter a Google app password in `SMTP_PASS` in `.env.local`, then run `npm run email:check` to verify authentication. `npm run email:test` sends four real test emails through the contact, quote and both career submission paths, including resume attachments. Form errors and fallback email links use the configured recipient.
+
 `npm run dev` and `npm run preview` include the same email endpoints through Vite middleware. On production Node.js hosting, run `npm run build` followed by `npm start`; this serves `dist/`, both API endpoints and application route fallbacks on `PORT` (default 3000). A static-only deployment cannot run the email backend. Optional `VITE_INQUIRY_ENDPOINT` and `VITE_CAREERS_ENDPOINT` overrides are retained for an existing compatible API.
+
+For the shared PHP hosting used by `arrcss.com`, run `npm run build:shared` and deploy `arrc-shared-hosting.zip` following [HOSTING.md](docs/HOSTING.md). This includes PHP endpoints and PHPMailer, with a private backend beside `public_html`. Upload the existing `.env.local` separately as `arrc-mail/.env`; the ZIP excludes credentials. Uploading only `dist/` cannot send mail on PHP hosting. `npm run hosting:check -- https://arrcss.com` verifies API routing without sending email. `npm run test:php` exercises the package with local Apache, PHP and a TLS SMTP fixture; it requires XAMPP or equivalent Apache/PHP paths configured in the test environment.
 
 The forms confirm success only after the SMTP server accepts the recipient. Missing credentials or mail failures show an error and preserve the entered details, with an email-app fallback. No message is claimed to be sent when delivery fails.
 

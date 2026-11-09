@@ -61,81 +61,89 @@ function applicationForm(overrides = {}) {
   return form;
 }
 
-test('contact, quote and career submissions deliver to the fixed inbox through SMTP', async (context) => {
-  const messages = [];
-  const recipients = [];
-  const smtp = createTcpServer((socket) => {
-    socket.write('220 local-test ESMTP\r\n');
-    let pending = '';
-    let dataMode = false;
-    let message = '';
-    socket.on('data', (chunk) => {
-      pending += chunk.toString();
-      let end;
-      while ((end = pending.indexOf('\r\n')) !== -1) {
-        const line = pending.slice(0, end);
-        pending = pending.slice(end + 2);
-        if (dataMode) {
-          if (line === '.') {
-            messages.push(message);
-            message = '';
-            dataMode = false;
-            socket.write('250 Message accepted\r\n');
-          } else message += `${line}\r\n`;
-        } else if (/^EHLO|^HELO/.test(line)) socket.write('250 local-test\r\n');
-        else if (/^RCPT TO:/.test(line)) {
-          recipients.push(line);
-          socket.write('250 Recipient accepted\r\n');
-        } else if (line === 'DATA') {
-          dataMode = true;
-          socket.write('354 Send message\r\n');
-        } else if (line === 'QUIT') socket.end('221 Goodbye\r\n');
-        else socket.write('250 OK\r\n');
-      }
+for (const smtpTo of [undefined, 'priyanshukashyap844@gmail.com']) {
+  test(`all forms deliver through SMTP to ${smtpTo || 'the default company inbox'}`, async (context) => {
+    const expectedRecipient = smtpTo || recipient;
+    const messages = [];
+    const recipients = [];
+    const smtp = createTcpServer((socket) => {
+      socket.write('220 local-test ESMTP\r\n');
+      let pending = '';
+      let dataMode = false;
+      let message = '';
+      socket.on('data', (chunk) => {
+        pending += chunk.toString();
+        let end;
+        while ((end = pending.indexOf('\r\n')) !== -1) {
+          const line = pending.slice(0, end);
+          pending = pending.slice(end + 2);
+          if (dataMode) {
+            if (line === '.') {
+              messages.push(message);
+              message = '';
+              dataMode = false;
+              socket.write('250 Message accepted\r\n');
+            } else message += `${line}\r\n`;
+          } else if (/^EHLO|^HELO/.test(line)) socket.write('250 local-test\r\n');
+          else if (/^RCPT TO:/.test(line)) {
+            recipients.push(line);
+            socket.write('250 Recipient accepted\r\n');
+          } else if (line === 'DATA') {
+            dataMode = true;
+            socket.write('354 Send message\r\n');
+          } else if (line === 'QUIT') socket.end('221 Goodbye\r\n');
+          else socket.write('250 OK\r\n');
+        }
+      });
     });
+    await listen(smtp, context);
+    // Local SMTP fixture only. Production createSmtpTransport always requires TLS.
+    const transport = nodemailer.createTransport({
+      host: '127.0.0.1',
+      port: smtp.address().port,
+      secure: false,
+      ignoreTLS: true,
+    });
+    const base = await listen(
+      apiServer({ transport, env: { SMTP_FROM: 'website@example.com', SMTP_TO: smtpTo } }),
+      context,
+    );
+    const contact = await post(base, { ...enquiry, to: 'other@example.com' });
+    assert.equal(contact.status, 200);
+    assert.equal((await contact.json()).success, true);
+    const quote = await post(base, {
+      ...enquiry,
+      formType: 'quote',
+      propertyType: 'Corporate Offices',
+      location: 'Gurugram',
+      personnel: '8',
+    });
+    assert.equal(quote.status, 200);
+    const application = await fetch(`${base}/api/careers`, {
+      method: 'POST',
+      body: applicationForm(),
+    });
+    assert.equal(application.status, 200);
+    const directApplication = await fetch(`${base}/api/careers`, {
+      method: 'POST',
+      body: applicationForm({ category: 'direct', designation: 'Security Guards' }),
+    });
+    assert.equal(directApplication.status, 200);
+    assert.equal(messages.length, 4);
+    assert.deepEqual(recipients, Array(4).fill(`RCPT TO:<${expectedRecipient}>`));
+    for (const message of messages) {
+      assert.match(message, /From: ARRC website <website@example.com>/);
+      assert.match(message, /Reply-To: asha@example.com/);
+      assert.ok(message.includes(`To: ${expectedRecipient}\r\n`));
+    }
+    assert.match(messages[0], /Please discuss security for our office premises/);
+    assert.match(messages[1], /Property type: Corporate Offices/);
+    assert.match(messages[1], /Personnel required: 8/);
+    assert.match(messages[2], /Content-Disposition: attachment; filename=resume.pdf/);
+    assert.match(messages[2], /Resume attached: resume.pdf/);
+    assert.match(messages[2], /JVBERi0xLjQgdGVzdCByZXN1bWU=/);
   });
-  await listen(smtp, context);
-  // Local SMTP fixture only. Production createSmtpTransport always requires TLS.
-  const transport = nodemailer.createTransport({
-    host: '127.0.0.1',
-    port: smtp.address().port,
-    secure: false,
-    ignoreTLS: true,
-  });
-  const base = await listen(
-    apiServer({ transport, env: { SMTP_FROM: 'website@example.com' } }),
-    context,
-  );
-  const contact = await post(base, { ...enquiry, to: 'other@example.com' });
-  assert.equal(contact.status, 200);
-  assert.equal((await contact.json()).success, true);
-  const quote = await post(base, {
-    ...enquiry,
-    formType: 'quote',
-    propertyType: 'Corporate Offices',
-    location: 'Gurugram',
-    personnel: '8',
-  });
-  assert.equal(quote.status, 200);
-  const application = await fetch(`${base}/api/careers`, {
-    method: 'POST',
-    body: applicationForm(),
-  });
-  assert.equal(application.status, 200);
-  assert.equal(messages.length, 3);
-  assert.deepEqual(recipients, Array(3).fill(`RCPT TO:<${recipient}>`));
-  for (const message of messages) {
-    assert.match(message, /From: ARRC website <website@example.com>/);
-    assert.match(message, /Reply-To: asha@example.com/);
-    assert.match(message, /To: info@arcsecuritysolutions.in/);
-  }
-  assert.match(messages[0], /Please discuss security for our office premises/);
-  assert.match(messages[1], /Property type: Corporate Offices/);
-  assert.match(messages[1], /Personnel required: 8/);
-  assert.match(messages[2], /Content-Disposition: attachment; filename=resume.pdf/);
-  assert.match(messages[2], /Resume attached: resume.pdf/);
-  assert.match(messages[2], /JVBERi0xLjQgdGVzdCByZXN1bWU=/);
-});
+}
 
 test('server validation rejects invalid enquiries, quotes, consent and role categories', async (context) => {
   let sent = 0;
@@ -170,10 +178,18 @@ test('server validation rejects invalid enquiries, quotes, consent and role cate
 
 test('missing SMTP, SMTP rejection and SMTP failure never report success', async (context) => {
   assert.equal(createSmtpTransport({}), null);
-  const missing = await listen(apiServer({ transport: null }), context);
+  const testRecipient = 'priyanshukashyap844@gmail.com';
+  const missing = await listen(
+    apiServer({ transport: null, env: { SMTP_TO: testRecipient } }),
+    context,
+  );
   const unavailable = await post(missing);
   assert.equal(unavailable.status, 503);
-  assert.equal((await unavailable.json()).success, false);
+  const unavailableBody = await unavailable.json();
+  assert.equal(unavailableBody.success, false);
+  assert.equal(unavailableBody.recipient, testRecipient);
+  assert.ok(unavailableBody.message.includes(testRecipient));
+  assert.equal((await post(missing, { ...enquiry, consent: false })).status, 422);
   for (const transport of [
     { sendMail: async () => ({ accepted: [] }) },
     {
@@ -189,6 +205,27 @@ test('missing SMTP, SMTP rejection and SMTP failure never report success', async
     assert.equal(JSON.parse(body).success, false);
     assert.doesNotMatch(body, /Private provider details/);
   }
+});
+
+test('Gmail SMTP accepts app passwords pasted with spaces and requires TLS', () => {
+  const transport = createSmtpTransport({
+    SMTP_HOST: 'smtp.gmail.com',
+    SMTP_USER: 'sender@example.com',
+    SMTP_PASS: 'aaaa bbbb cccc dddd',
+    SMTP_PORT: '587',
+    SMTP_SECURE: 'false',
+  });
+  assert.equal(transport.options.auth.pass, 'aaaabbbbccccdddd');
+  assert.equal(transport.options.requireTLS, true);
+  transport.close();
+  assert.equal(
+    createSmtpTransport({
+      SMTP_HOST: 'smtp.gmail.com',
+      SMTP_USER: 'sender@example.com',
+      SMTP_PASS: ' ',
+    }),
+    null,
+  );
 });
 
 test('API rejects unexpected origins, malformed requests, large payloads and excess requests', async (context) => {

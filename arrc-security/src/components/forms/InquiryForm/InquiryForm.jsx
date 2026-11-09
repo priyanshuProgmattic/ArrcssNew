@@ -49,7 +49,7 @@ export default function InquiryForm({ isQuote = false }) {
       reset();
     } catch (error) {
       setStatus({ type: 'error', message: error.message });
-      setDraft(buildEmailDraft(values));
+      setDraft(buildEmailDraft(values, error.recipient));
     }
   }
   function field(name, label, options = {}) {

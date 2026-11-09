@@ -85,3 +85,19 @@ test('backend submission confirms success only after an explicit successful JSON
     /could not confirm/,
   );
 });
+
+test('enquiry delivery errors preserve the server message and the configured fallback inbox', async () => {
+  const recipient = 'priyanshukashyap844@gmail.com';
+  const message = `Email delivery is temporarily unavailable. Please email ${recipient} or try again later.`;
+  await assert.rejects(
+    sendInquiry('/api/enquiry', values, async () => ({
+      ok: false,
+      json: async () => ({ success: false, message, recipient }),
+    })),
+    (error) => {
+      assert.equal(error.message, message);
+      assert.equal(new URL(buildEmailDraft(values, error.recipient).href).pathname, recipient);
+      return true;
+    },
+  );
+});

@@ -1,0 +1,20 @@
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Protect configuration files and any accidentally uploaded private directories.
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,END]
+RewriteRule ^(?:arrc-mail|server|src|node_modules|vendor|docs)(?:/|$) - [F,END]
+
+# API requests must reach PHP before the React page fallback.
+RewriteRule ^api(?:/|$) api/index.php [END]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [END]
+
+RewriteCond %{REQUEST_METHOD} !^(GET|HEAD)$
+RewriteRule ^ - [R=405,END]
+RewriteRule ^ index.html [END]
+</IfModule>

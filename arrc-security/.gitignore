@@ -6,3 +6,5 @@ test-results/
 playwright-report/
 .vite/
 .tools/
+deploy/php/vendor/
+arrc-shared-hosting.zip

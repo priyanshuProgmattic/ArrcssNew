@@ -16,17 +16,21 @@ class RequestError extends Error {
 }
 
 export function createSmtpTransport(env = process.env) {
-  if (!env.SMTP_HOST || !env.SMTP_USER || !env.SMTP_PASS) return null;
+  const host = env.SMTP_HOST?.trim();
+  const user = env.SMTP_USER?.trim();
+  const pass =
+    host?.toLowerCase() === 'smtp.gmail.com' ? env.SMTP_PASS?.replace(/\s+/g, '') : env.SMTP_PASS;
+  if (!host || !user || !pass) return null;
   const port = Number(env.SMTP_PORT || 587);
   if (!Number.isInteger(port) || port < 1 || port > 65535)
     throw new Error('SMTP_PORT must be a valid port number.');
   const secure = env.SMTP_SECURE ? env.SMTP_SECURE === 'true' : port === 465;
   return nodemailer.createTransport({
-    host: env.SMTP_HOST,
+    host,
     port,
     secure,
     requireTLS: !secure,
-    auth: { user: env.SMTP_USER, pass: env.SMTP_PASS },
+    auth: { user, pass },
     connectionTimeout: 10000,
     greetingTimeout: 10000,
     socketTimeout: 20000,
@@ -35,13 +39,13 @@ export function createSmtpTransport(env = process.env) {
   });
 }
 
-function respond(res, status, message) {
+function respond(res, status, message, recipient) {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
     'X-Content-Type-Options': 'nosniff',
   });
-  res.end(JSON.stringify({ success: status === 200, message }));
+  res.end(JSON.stringify({ success: status === 200, message, recipient }));
 }
 
 function readBody(req, limit) {
@@ -131,6 +135,7 @@ export function createApiHandler({
   logger = console,
   now = Date.now,
 } = {}) {
+  const recipient = env.SMTP_TO?.trim() || company.email;
   const attempts = new Map();
   const windowMs = 15 * 60 * 1000;
   return async (req, res, next) => {
@@ -174,29 +179,30 @@ export function createApiHandler({
         res.setHeader('Retry-After', String(Math.ceil((attempt.expires - timestamp) / 1000)));
         throw new RequestError(429, 'Too many submissions. Please try again later or email us.');
       }
-      if (!transport)
-        throw new RequestError(503, `Email is unavailable. Please write to ${company.email}.`);
       const message = await (pathname === '/api/careers'
         ? applicationMessage(req)
         : inquiryMessage(req));
+      if (!transport)
+        throw new RequestError(
+          503,
+          `Email delivery is temporarily unavailable. Please email ${recipient} or try again later.`,
+        );
       const result = await transport.sendMail({
         ...message,
-        from: { name: 'ARRC website', address: env.SMTP_FROM || company.email },
-        to: company.email,
+        from: { name: 'ARRC website', address: env.SMTP_FROM || env.SMTP_USER || company.email },
+        to: recipient,
         disableFileAccess: true,
         disableUrlAccess: true,
       });
-      if (
-        !result.accepted?.some((address) => address.toLowerCase() === company.email.toLowerCase())
-      )
+      if (!result.accepted?.some((address) => address.toLowerCase() === recipient.toLowerCase()))
         throw new Error('The mail server did not accept the recipient.');
       respond(res, 200, 'Your message was accepted by our mail server.');
     } catch (error) {
       if (error instanceof RequestError) {
-        respond(res, error.status, error.message);
+        respond(res, error.status, error.message, recipient);
       } else {
         logger.error(`Website mail delivery failed (${error.code || 'SMTP_ERROR'}).`);
-        respond(res, 502, `Your message could not be sent. Please write to ${company.email}.`);
+        respond(res, 502, `Your message could not be sent. Please email ${recipient}.`, recipient);
       }
     }
   };

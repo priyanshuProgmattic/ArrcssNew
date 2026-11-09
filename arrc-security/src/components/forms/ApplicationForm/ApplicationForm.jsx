@@ -59,7 +59,7 @@ export default function ApplicationForm({ category, onCancel, onSubmittingChange
       setResult({
         type: 'error',
         message: error.message,
-        draft: buildApplicationDraft(values, category.id),
+        draft: buildApplicationDraft(values, category.id, error.recipient),
       });
     }
   }
