@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { renderEmail } from './email-template.js';
+import { services } from '../src/data/services.js';
 import { company } from '../src/data/company.js';
 import { careerCategories } from '../src/data/careers.js';
 import { buildEmailDraft, createInquirySchema } from '../src/utils/inquiry.js';
@@ -80,7 +82,16 @@ async function inquiryMessage(req) {
   const parsed = createInquirySchema(data.formType === 'quote').safeParse(data);
   if (!parsed.success) throw new RequestError(422, parsed.error.issues[0].message);
   const draft = buildEmailDraft(parsed.data);
-  return { replyTo: parsed.data.email, subject: draft.subject, text: draft.body };
+  const values = parsed.data;
+  const title = data.formType === 'quote' ? 'New quote request' : 'New contact enquiry';
+  return {
+    replyTo: values.email, subject: data.formType === 'quote' ? draft.subject.replace('Website enquiry', 'Quote request') : draft.subject, text: draft.body,
+    html: renderEmail({ title, intro: 'A visitor has submitted their requirements. Contact details and submission information are below.', fields: [
+      ['Name', values.fullName], ['Company', values.companyName], ['Email', values.email], ['Phone', values.phone],
+      ['Service', services.find((service) => service.slug === values.service)?.title || 'Integrated services'],
+      ['Property type', values.propertyType], ['Site location', values.location], ['Personnel required', values.personnel],
+    ], message: values.message }),
+  };
 }
 
 async function applicationMessage(req) {
@@ -115,6 +126,12 @@ async function applicationMessage(req) {
     replyTo: parsed.data.email,
     subject: draft.subject,
     text: draft.body.replace('Resume to attach:', 'Resume attached:'),
+    html: renderEmail({ title: 'New career application', intro: 'A candidate has applied through the website. Their resume is attached to this email.', fields: [
+      ['Category', careerCategories.find((item) => item.id === category).title],
+      ['Position', parsed.data.designation], ['Name', parsed.data.fullName], ['Email', parsed.data.email], ['Phone', parsed.data.phone],
+      ['Address', parsed.data.address], ['Current location', parsed.data.currentLocation], ['Experience', parsed.data.experience],
+      ['Last salary', parsed.data.lastSalary], ['Last position / employer', parsed.data.lastPost],
+    ], resumeName: resume.name }),
     attachments: [
       {
         filename: resume.name.replace(/[\\/:\x00-\x1f\x7f]/g, '_').slice(-180),
