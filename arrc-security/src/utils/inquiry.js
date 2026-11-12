@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { services } from '../data/services.js';
 import { company } from '../data/company.js';
+import { readMailResponse } from './mail-response.js';
 
 const phone = z
   .string()
@@ -100,8 +101,8 @@ export async function sendInquiry(endpoint, values, fetcher = fetch) {
       throw new Error(
         'The enquiry service could not accept your message. Please try again or contact us directly.',
       );
-    const result = await response.json();
-    if (result.success !== true)
+    const result = await readMailResponse(response);
+    if (result?.success !== true)
       throw new Error('Delivery was not confirmed. Please contact us by phone or email.');
     return result;
   } catch (error) {

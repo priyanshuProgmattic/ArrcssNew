@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { careerCategories, careers } from '../data/careers.js';
+import { readMailResponse } from './mail-response.js';
 
 export const MAX_RESUME_SIZE = 5 * 1024 * 1024;
 const resumeTypes = {
@@ -112,8 +113,8 @@ export async function sendApplication(endpoint, values, teamId, fetcher = fetch)
       throw new Error(
         'Your application could not be accepted. Please try again or email our team.',
       );
-    const result = await response.json();
-    if (result.success !== true)
+    const result = await readMailResponse(response);
+    if (result?.success !== true)
       throw new Error('Receipt was not confirmed. Please try again or email our team.');
     return result;
   } catch (error) {

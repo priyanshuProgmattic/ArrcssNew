@@ -3,11 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "start": "node server/index.js",
+    "check:live-mail": "node scripts/check-live-mail.mjs",
+    "check:smtp": "node scripts/check-smtp.mjs",
     "test": "node --test tests/*.test.js",
     "format": "prettier --write \"src/**/*.{js,jsx,css}\" \"server/*.js\" \"scripts/*.mjs\" \"tests/*.js\" \"*.{json,js,html}\""
   },
