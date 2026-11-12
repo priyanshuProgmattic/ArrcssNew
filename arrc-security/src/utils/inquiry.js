@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import { services } from '../data/services.js';
+<<<<<<< HEAD
 import { formRecipient, readFormResponse } from './form-response.js';
+=======
+import { company } from '../data/company.js';
+import { readMailResponse } from './mail-response.js';
+>>>>>>> 4ec086f46d53ecc52a2adf84486e04b9b12edb41
 
 const phone = z
   .string()
@@ -96,11 +101,22 @@ export async function sendInquiry(endpoint, values, fetcher = fetch) {
       body: JSON.stringify({ ...values, source: 'arrc-website' }),
       signal: controller.signal,
     });
+<<<<<<< HEAD
     return await readFormResponse(
       response,
       'The enquiry service could not accept your message. Please try again or contact us directly.',
       'Delivery was not confirmed. Please contact us by phone or email.',
     );
+=======
+    if (!response.ok)
+      throw new Error(
+        'The enquiry service could not accept your message. Please try again or contact us directly.',
+      );
+    const result = await readMailResponse(response);
+    if (result?.success !== true)
+      throw new Error('Delivery was not confirmed. Please contact us by phone or email.');
+    return result;
+>>>>>>> 4ec086f46d53ecc52a2adf84486e04b9b12edb41
   } catch (error) {
     if (error.name === 'AbortError')
       throw new Error('The request timed out. Please try again or contact us directly.');

@@ -1,0 +1,7 @@
+# Add inside the existing HTTPS VirtualHost for arrcss.com (not .htaccess).
+# Requires Apache proxy and proxy_http modules and a running npm start process.
+# Place before existing SPA rewrite rules; remove those rules when proxying all paths.
+ProxyRequests Off
+ProxyPreserveHost On
+ProxyPass / http://127.0.0.1:3000/ connectiontimeout=5 timeout=60
+ProxyPassReverse / http://127.0.0.1:3000/
