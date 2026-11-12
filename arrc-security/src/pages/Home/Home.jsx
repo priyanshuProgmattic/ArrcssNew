@@ -6,6 +6,10 @@ import OperationsOverview from '../../components/home/OperationsOverview/Operati
 import TechnologyOverview from '../../components/home/TechnologyOverview/TechnologyOverview';
 import IndustriesOverview from '../../components/home/IndustriesOverview/IndustriesOverview';
 import ContactCTA from '../../components/common/ContactCTA/ContactCTA';
+import {
+  SpecialistSecurity,
+  ServiceGlimpses,
+} from '../../components/home/WorkShowcase/WorkShowcase';
 import './Home.css';
 export default function Home() {
   return (
@@ -13,6 +17,7 @@ export default function Home() {
       <Hero />
       <Introduction />
       <ServicesOverview />
+      <SpecialistSecurity />
       <WhyARRC />
       <OperationsOverview />
       <TechnologyOverview />
@@ -30,6 +35,7 @@ export default function Home() {
           <span>THE ARRC PHILOSOPHY</span>
         </div>
       </section>
+      <ServiceGlimpses />
       <ContactCTA />
     </div>
   );

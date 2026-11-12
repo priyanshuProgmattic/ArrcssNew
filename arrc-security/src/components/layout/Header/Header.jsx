@@ -135,7 +135,7 @@ export default function Header() {
                       <span className="nav-dropdown__eyebrow">
                         {item.menu === 'services' ? 'THE COMPLETE CIRCLE' : 'THE ARRC APPROACH'}
                       </span>
-                      <Icon name={item.menu === 'services' ? 'Layers3' : 'ShieldCheck'} size={39} />
+                      {item.menu !== 'services' && <Icon name="ShieldCheck" size={39} />}
                       <h2>
                         {item.menu === 'services' ? (
                           <>

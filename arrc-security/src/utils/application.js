@@ -1,11 +1,6 @@
 import { z } from 'zod';
-<<<<<<< HEAD
 import { careerCategories } from '../data/careers.js';
 import { formRecipient, readFormResponse } from './form-response.js';
-=======
-import { careerCategories, careers } from '../data/careers.js';
-import { readMailResponse } from './mail-response.js';
->>>>>>> 4ec086f46d53ecc52a2adf84486e04b9b12edb41
 
 export const MAX_RESUME_SIZE = 5 * 1024 * 1024;
 const resumeTypes = {
@@ -114,22 +109,11 @@ export async function sendApplication(endpoint, values, teamId, fetcher = fetch)
       body: data,
       signal: controller.signal,
     });
-<<<<<<< HEAD
     return await readFormResponse(
       response,
       'Your application could not be accepted. Please try again or email our team.',
       'Receipt was not confirmed. Please try again or email our team.',
     );
-=======
-    if (!response.ok)
-      throw new Error(
-        'Your application could not be accepted. Please try again or email our team.',
-      );
-    const result = await readMailResponse(response);
-    if (result?.success !== true)
-      throw new Error('Receipt was not confirmed. Please try again or email our team.');
-    return result;
->>>>>>> 4ec086f46d53ecc52a2adf84486e04b9b12edb41
   } catch (error) {
     if (error.name === 'AbortError')
       throw new Error('The upload timed out. Please try again or apply by email.');

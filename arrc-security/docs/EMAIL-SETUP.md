@@ -10,11 +10,7 @@ All enquiries, quote requests and career applications are sent to **info@arcsecu
 4. Run `npm run dev` locally. For Node.js hosting, run `npm run build` and then `npm start`. The server uses `PORT`, defaulting to 3000. Hosting environment variables may be used instead of `.env.local`.
 5. Run `npm run email:check` to verify the connection and authentication. Then run `npm run email:test` to send four real submissions through the backend: contact, quote, direct staff and indirect staff. Both career submissions include a test resume. Confirm all four arrive in the `SMTP_TO` inbox, including Spam. Then submit through the website with your own details and confirm that replying addresses the visitor.
 
-<<<<<<< HEAD
 Live delivery requires the app password from step 2. Without valid credentials, forms show the server's error, keep the entered details and offer an email draft addressed to the configured inbox. Restart the Node process after changing SMTP settings. Vite also uses `SMTP_TO` for the browser's fallback links; rebuild before deploying a changed recipient.
-=======
-Live delivery requires valid SMTP credentials on the production server. A local `.env.local` does not configure the live host. Without valid credentials, forms show an error and offer an email draft without claiming success. Restart the Node process after changing SMTP settings.
->>>>>>> 4ec086f46d53ecc52a2adf84486e04b9b12edb41
 
 The browser calls `/api/enquiry` for contact and quote forms and `/api/careers` for applications. The same endpoints run in development, preview and the production Node server. Deploying only `dist/` to static hosting does not run these endpoints.
 

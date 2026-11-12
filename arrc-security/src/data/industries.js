@@ -9,6 +9,16 @@ export const industries = [
     services: ['manned-guarding', 'escort-security', 'facility-management'],
   },
   {
+    slug: 'pmo',
+    title: 'PMO & PSO Office Security',
+    icon: 'Landmark',
+    image: 'Pso-image.jpeg',
+    imageAlt: 'Security personnel accompanying guests during an event',
+    description:
+      'Our security work includes PMO and PSO offices, with a disciplined approach to office guarding, visitor coordination and personal protection. Discretion, preparedness and attention to detail guide every assignment.',
+    services: ['manned-guarding', 'personal-protection'],
+  },
+  {
     slug: 'retail',
     title: 'Retail & Shopping Malls',
     icon: 'ShoppingBag',

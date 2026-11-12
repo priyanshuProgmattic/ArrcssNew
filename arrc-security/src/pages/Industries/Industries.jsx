@@ -34,7 +34,10 @@ export default function Industries() {
                 <div className="industry-detail__image">
                   <ResponsiveImage
                     src={`/assets/images/${industry.image}`}
-                    alt={`An illustrative ${industry.title.toLowerCase()} environment`}
+                    alt={
+                      industry.imageAlt ||
+                      `An illustrative ${industry.title.toLowerCase()} environment`
+                    }
                     loading="lazy"
                     width="700"
                     height="480"
