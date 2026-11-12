@@ -44,17 +44,17 @@ export function SpecialistSecurity() {
           <div className="specialist-copy">
             <p className="eyebrow">TRUSTED WITH RESPONSIBILITY</p>
             <h2 id="office-security-title">
-              PMO &amp; PSO
+              Prime Minister’s Office
               <br />
-              <span>office security.</span>
+              <span>(PMO) security.</span>
             </h2>
             <p>
               Professional protection for environments where discretion, preparedness and attention
               to detail matter every day.
             </p>
             <p>
-              Our security work includes PMO and PSO offices, bringing a disciplined presence to
-              office premises and personal protection assignments.
+              Our security work includes the Prime Minister’s Office (PMO), bringing a disciplined
+              presence to office premises and personal protection assignments.
             </p>
             <div className="specialist-tags">
               <span>Office security</span>
@@ -99,13 +99,15 @@ export function SpecialistSecurity() {
           <div className="women-security__photos">
             {womenPhotos.map(([file, alt], index) => (
               <figure key={file}>
-                <img
-                  src={`/assets/images/${file}`}
-                  alt={alt}
-                  loading="lazy"
-                  width="420"
-                  height="560"
-                />
+                <div className={`women-security__frame women-security__frame--${index + 1}`}>
+                  <img
+                    src={`/assets/images/${file}`}
+                    alt={alt}
+                    loading="lazy"
+                    width="420"
+                    height="560"
+                  />
+                </div>
                 <figcaption>
                   <span>0{index + 1}</span>
                   {

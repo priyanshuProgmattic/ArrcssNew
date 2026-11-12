@@ -19,11 +19,9 @@ export default function ServiceDetail() {
         title={service.title}
         description={service.description}
         image={service.image}
-        imageAlt={
-          service.image === 'security-lobby.jpeg'
-            ? 'Security staff at a building reception desk'
-            : 'A professional commercial environment'
-        }
+        imageAlt={service.imageAlt}
+        imagePosition={service.imagePosition}
+        imageAspectRatio={slug === 'smart-security' ? '4 / 3' : undefined}
       />
       <section className="section">
         <div className="container service-detail__layout">
@@ -35,6 +33,20 @@ export default function ServiceDetail() {
               Where it matters.
             </h2>
             <p className="service-detail__intro">{service.introduction}</p>
+            <div className="service-detail__gallery" aria-label={`${service.title} photos`}>
+              {service.gallery.map((photo) => (
+                <figure key={photo.image}>
+                  <img
+                    src={`/assets/images/${photo.image}`}
+                    alt={photo.alt}
+                    loading="lazy"
+                    width="640"
+                    height="480"
+                  />
+                  <figcaption>{photo.alt}</figcaption>
+                </figure>
+              ))}
+            </div>
             <h3 className="service-detail__subheading">What the service can include</h3>
             <ul className="service-detail__capabilities">
               {service.capabilities.map((item) => (
@@ -87,6 +99,20 @@ export default function ServiceDetail() {
           </aside>
         </div>
       </section>
+      <section className="section">
+        <div className="container">
+          <p className="eyebrow">CONNECTED SERVICES</p>
+          <h2>Build a more complete solution.</h2>
+          <div className="service-detail__related">
+            {services
+              .filter((item) => item.slug !== slug)
+              .slice(0, 3)
+              .map((item, index) => (
+                <ServiceCard key={item.slug} service={item} index={index} />
+              ))}
+          </div>
+        </div>
+      </section>
       <section className="section surface">
         <div className="container">
           <p className="eyebrow">FROM PLANNING TO PRACTICE</p>
@@ -104,20 +130,6 @@ export default function ServiceDetail() {
             See our full operations process
             <Icon name="ArrowRight" size={17} />
           </Link>
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <p className="eyebrow">CONNECTED SERVICES</p>
-          <h2>Build a more complete solution.</h2>
-          <div className="service-detail__related">
-            {services
-              .filter((item) => item.slug !== slug)
-              .slice(0, 3)
-              .map((item, index) => (
-                <ServiceCard key={item.slug} service={item} index={index} />
-              ))}
-          </div>
         </div>
       </section>
       <ContactCTA />

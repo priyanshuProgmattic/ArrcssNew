@@ -10,12 +10,12 @@ export const industries = [
   },
   {
     slug: 'pmo',
-    title: 'PMO & PSO Office Security',
+    title: 'Prime Minister’s Office (PMO) Security',
     icon: 'Landmark',
     image: 'Pso-image.jpeg',
     imageAlt: 'Security personnel accompanying guests during an event',
     description:
-      'Our security work includes PMO and PSO offices, with a disciplined approach to office guarding, visitor coordination and personal protection. Discretion, preparedness and attention to detail guide every assignment.',
+      'Our security work includes the Prime Minister’s Office (PMO), with a disciplined approach to office guarding, visitor coordination and personal protection. Discretion, preparedness and attention to detail guide every assignment.',
     services: ['manned-guarding', 'personal-protection'],
   },
   {

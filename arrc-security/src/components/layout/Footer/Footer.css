@@ -9,8 +9,11 @@
   padding-bottom: 55px;
 }
 .footer__brand img {
-  width: 117px;
+  width: 166px;
+  max-width: 100%;
   height: auto;
+  display: block;
+  filter: saturate(1.4) contrast(1.12);
 }
 .footer__brand > p {
   font-family: Manrope, sans-serif;

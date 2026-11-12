@@ -1,0 +1,38 @@
+.technology-photos {
+  min-width: 0;
+}
+.technology-photos figure {
+  margin: 0;
+  min-width: 0;
+}
+.technology-photos img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.technology-photos__main img {
+  aspect-ratio: 16 / 10;
+  height: auto;
+}
+.technology-photos figcaption {
+  padding-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.technology-photos__support {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.technology-photos__support img {
+  aspect-ratio: 16 / 10;
+  height: auto;
+  object-position: center 38%;
+}
+
+.technology-photos__support img[src$='img3.jpeg'] {
+  object-position: center 25%;
+}

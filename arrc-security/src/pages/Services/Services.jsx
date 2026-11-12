@@ -53,7 +53,7 @@ export default function Services() {
         <div className="container grid-2 services-integrated">
           <ResponsiveImage
             src="/assets/images/workplace.jpeg"
-            alt="An open and organized professional workspace"
+            alt="Security personnel participating in a supervised site briefing"
             loading="lazy"
             width="700"
             height="500"

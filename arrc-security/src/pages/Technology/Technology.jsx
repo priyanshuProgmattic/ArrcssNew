@@ -1,6 +1,6 @@
 import { technology } from '../../data/operations';
 import PageHero from '../../components/common/PageHero/PageHero';
-import TechnologyPanel from '../../components/common/TechnologyPanel/TechnologyPanel';
+import TechnologyPhotos from '../../components/common/TechnologyPhotos/TechnologyPhotos';
 import ContactCTA from '../../components/common/ContactCTA/ContactCTA';
 import Button from '../../components/common/Button/Button';
 import Icon from '../../components/common/Icon/Icon';
@@ -40,7 +40,7 @@ export default function Technology() {
               assignment and are agreed with your team during planning.
             </p>
           </div>
-          <TechnologyPanel />
+          <TechnologyPhotos />
         </div>
       </section>
       <section className="section surface">

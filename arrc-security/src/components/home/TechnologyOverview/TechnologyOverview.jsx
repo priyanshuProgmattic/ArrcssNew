@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import TechnologyPanel from '../../common/TechnologyPanel/TechnologyPanel';
+import TechnologyPhotos from '../../common/TechnologyPhotos/TechnologyPhotos';
 import Icon from '../../common/Icon/Icon';
 import './TechnologyOverview.css';
 export default function TechnologyOverview() {
@@ -41,7 +41,7 @@ export default function TechnologyOverview() {
             <Icon name="ArrowUpRight" size={17} />
           </Link>
         </div>
-        <TechnologyPanel />
+        <TechnologyPhotos />
       </div>
     </section>
   );

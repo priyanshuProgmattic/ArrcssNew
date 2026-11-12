@@ -354,3 +354,42 @@
     transition: none;
   }
 }
+
+/* Frame the people and their work, rather than the empty surroundings. */
+.women-security__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #e7e7ec;
+}
+.women-security__frame img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 35%;
+}
+.women-security__frame--1 img {
+  position: absolute;
+  top: -31.2%;
+  height: 162.3%;
+  object-fit: fill;
+}
+.women-security__frame--2 img {
+  object-position: 75% 40%;
+}
+.women-security__frame--3 img {
+  object-position: 70% 35%;
+}
+.women-security__frame--4 img {
+  object-position: 50% 25%;
+}
+@media (max-width: 600px) {
+  .women-security__photos {
+    grid-template-columns: 1fr;
+  }
+  .women-security__photos figure:nth-child(even) {
+    transform: none;
+  }
+  .women-security__frame {
+    aspect-ratio: 4 / 5;
+  }
+}

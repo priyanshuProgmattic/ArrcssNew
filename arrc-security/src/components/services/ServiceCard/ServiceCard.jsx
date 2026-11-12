@@ -4,6 +4,16 @@ import './ServiceCard.css';
 export default function ServiceCard({ service, index = 0 }) {
   return (
     <Link className="service-card" to={`/services/${service.slug}`}>
+      <div className="service-card__photo">
+        <img
+          src={`/assets/images/${service.image}`}
+          alt={service.imageAlt || service.title}
+          style={{ objectPosition: service.imagePosition }}
+          loading="lazy"
+          width="640"
+          height="400"
+        />
+      </div>
       <div className="service-card__top">
         <span className="service-card__icon">
           <Icon name={service.icon} size={27} />

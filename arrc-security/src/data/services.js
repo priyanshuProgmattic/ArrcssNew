@@ -5,7 +5,19 @@ export const services = [
     shortTitle: 'Manned security',
     icon: 'ShieldCheck',
     category: 'Security services',
-    image: 'security-lobby.jpeg',
+    image: 'img-1.jpeg',
+    imageAlt: 'Uniformed security officers managing a vehicle entrance',
+    imagePosition: '50% 42%',
+    gallery: [
+      {
+        image: 'img3.jpeg',
+        alt: 'Security officers maintaining records at an entrance checkpoint',
+      },
+      {
+        image: 'security-lobby.jpeg',
+        alt: 'Uniformed security team assembled at a building entrance',
+      },
+    ],
     description:
       'A professional presence. A safer environment. Trained security personnel, with responsibilities shaped around your premises.',
     introduction:
@@ -31,7 +43,16 @@ export const services = [
     shortTitle: 'Escort security',
     icon: 'CarFront',
     category: 'Security services',
-    image: 'corporate-building.jpeg',
+    image: 'img-13.jpeg',
+    imageAlt: 'Security officer stationed beside a vehicle at a site entrance',
+    imagePosition: '50% 45%',
+    gallery: [
+      { image: 'img-10.jpeg', alt: 'Security officers deployed at a roadside post' },
+      {
+        image: 'img-14.jpeg',
+        alt: 'Security personnel stationed at an illuminated building entrance',
+      },
+    ],
     description:
       'Thoughtful protection for employee journeys, with professional escort personnel and clearly defined travel protocols.',
     introduction:
@@ -57,7 +78,13 @@ export const services = [
     shortTitle: 'Personal protection',
     icon: 'UserRoundCheck',
     category: 'Security services',
-    image: 'security-lobby.jpeg',
+    image: 'Pso-image.jpeg',
+    imageAlt: 'Security personnel accompanying guests during an event',
+    imagePosition: '50% 45%',
+    gallery: [
+      { image: 'img-7.jpeg', alt: 'Uniformed security professionals ready for duty' },
+      { image: 'img-13.jpeg', alt: 'Security officer deployed beside a vehicle' },
+    ],
     description:
       'Discreet, disciplined personal security for executives, individuals and environments that need a specialist presence.',
     introduction:
@@ -83,7 +110,13 @@ export const services = [
     shortTitle: 'Event security',
     icon: 'TicketCheck',
     category: 'Security services',
-    image: 'workplace.jpeg',
+    image: 'warehouse.jpeg',
+    imageAlt: 'Security team receiving an evening deployment briefing',
+    imagePosition: '50% 40%',
+    gallery: [
+      { image: 'img-15.jpeg', alt: 'Security personnel present among guests at an event' },
+      { image: 'img-14.jpeg', alt: 'Security personnel managing a venue entrance' },
+    ],
     description:
       'From the first arrival to the final departure, coordinated security that keeps your event moving.',
     introduction:
@@ -109,7 +142,13 @@ export const services = [
     shortTitle: 'Facility management',
     icon: 'Building2',
     category: 'Integrated support',
-    image: 'workplace.jpeg',
+    image: 'residential.jpeg',
+    imageAlt: 'Site support personnel stationed at a commercial building entrance',
+    imagePosition: '50% 40%',
+    gallery: [
+      { image: 'residential.jpeg', alt: 'Support personnel stationed at a commercial entrance' },
+      { image: 'Women-security-3.jpeg', alt: 'Uniformed officer managing a reception desk' },
+    ],
     description:
       'Clean, cared-for spaces that work as hard as you do. Coordinated housekeeping and everyday facility support.',
     introduction:
@@ -136,6 +175,15 @@ export const services = [
     icon: 'UsersRound',
     category: 'Integrated support',
     image: 'team.jpeg',
+    imageAlt: 'Site support team assembled in uniform outside a commercial building',
+    imagePosition: '50% 38%',
+    gallery: [
+      {
+        image: 'Women-security-3.jpeg',
+        alt: 'Front-office security personnel assisting a visitor',
+      },
+      { image: 'workplace.jpeg', alt: 'Site personnel taking part in a supervised team briefing' },
+    ],
     description:
       'The right people for your everyday operations. Flexible skilled and unskilled staffing, managed through one partner.',
     introduction:
@@ -161,7 +209,13 @@ export const services = [
     shortTitle: 'Smart security',
     icon: 'Cctv',
     category: 'Technology',
-    image: 'corporate-building.jpeg',
+    image: 'img3.jpeg',
+    imageAlt: 'Security officers managing a site checkpoint and visitor records',
+    imagePosition: '50% 25%',
+    gallery: [
+      { image: 'img3.jpeg', alt: 'Security checkpoint with officers and visitor records' },
+      { image: 'img-1.jpeg', alt: 'Security officers monitoring vehicle access at an entrance' },
+    ],
     description:
       'Greater visibility into your security operation through digital patrols, attendance and location-supported monitoring.',
     introduction:

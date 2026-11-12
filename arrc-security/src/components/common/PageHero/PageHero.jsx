@@ -8,6 +8,8 @@ export default function PageHero({
   description,
   image = 'corporate-building.jpeg',
   imageAlt = 'Glass facade of a modern commercial building',
+  imagePosition = 'center',
+  imageAspectRatio,
 }) {
   return (
     <section className="page-hero">
@@ -23,10 +25,14 @@ export default function PageHero({
             <h1>{title}</h1>
             {description && <p className="lead">{description}</p>}
           </div>
-          <div className="page-hero__image">
+          <div
+            className="page-hero__image"
+            style={imageAspectRatio ? { aspectRatio: imageAspectRatio, height: 'auto' } : undefined}
+          >
             <ResponsiveImage
               src={`/assets/images/${image}`}
               alt={imageAlt}
+              style={{ objectPosition: imagePosition }}
               width="700"
               height="460"
             />
